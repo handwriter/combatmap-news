@@ -1,0 +1,122 @@
+# Sveltia CMS configuration (Decap-compatible format).
+# Every save is a commit to main; the "Publish news" workflow validates and deploys it in ~1–2 minutes.
+
+backend:
+  name: github
+  repo: handwriter/combatmap-news
+  branch: main
+  commit_messages:
+    create: 'news: create {{slug}}'
+    update: 'news: update {{slug}}'
+    delete: 'news: delete {{slug}}'
+    uploadMedia: 'media: upload {{path}}'
+    deleteMedia: 'media: delete {{path}}'
+
+site_url: https://handwriter.github.io/combatmap-news/
+display_url: https://handwriter.github.io/combatmap-news/
+
+media_folder: content/media
+public_folder: /media
+
+i18n:
+  structure: single_file
+  locales: [en, ru, tr, fr, ar]
+  default_locale: en
+
+collections:
+  - name: news
+    label: News
+    label_singular: News item
+    description: >-
+      Cards in the game's main menu. Only "Title (en)" and "Published at" are required —
+      empty image / text / button blocks are simply not shown. Keep "Draft" on to preview
+      in dev builds (news.preview.json), switch it off to publish to players.
+    folder: content/news
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    identifier_field: title
+    summary: '{{title}} · {{type}} · {{publishedAt | date("YYYY-MM-DD")}}{{draft | ternary(" · DRAFT", "")}}'
+    sortable_fields: [publishedAt, priority, title]
+    i18n: true
+    fields:
+      - name: draft
+        label: Draft (hidden from players)
+        widget: boolean
+        default: true
+        hint: Drafts are only visible in dev builds. Switch off and save to publish.
+      - name: type
+        label: Type
+        widget: select
+        default: news
+        options:
+          - { label: News, value: news }
+          - { label: Event, value: event }
+          - { label: Update, value: update }
+      - name: priority
+        label: Priority
+        widget: number
+        value_type: int
+        min: 0
+        max: 100
+        default: 0
+        hint: Higher is shown first; equal priority → newest first. The menu shows up to 4 items.
+      - name: publishedAt
+        label: Published at
+        widget: datetime
+        picker_utc: true
+        default: '{{now}}'
+      - name: startsAt
+        label: Show from (optional)
+        widget: datetime
+        picker_utc: true
+        required: false
+        hint: Leave empty to show immediately. Times are UTC.
+      - name: endsAt
+        label: Show until (optional)
+        widget: datetime
+        picker_utc: true
+        required: false
+        hint: Leave empty to show until removed.
+      - name: minGameVersion
+        label: Min game version (optional)
+        widget: string
+        required: false
+        pattern: ['^\d+(\.\d+)*$', 'Format: 0.107']
+      - name: maxGameVersion
+        label: Max game version (optional)
+        widget: string
+        required: false
+        pattern: ['^\d+(\.\d+)*$', 'Format: 0.107']
+      - name: image
+        label: Image (optional)
+        widget: image
+        required: false
+        hint: Any size; it is cropped to 16:9 and resized to 640×360 JPEG on publish.
+      - name: title
+        label: Title
+        widget: string
+        i18n: true
+        required: [en]
+        pattern: ['^.{1,80}$', 'Max 80 characters (2 lines on the card)']
+      - name: text
+        label: Text (optional)
+        widget: text
+        i18n: true
+        required: false
+        pattern: ['^[\s\S]{0,280}$', 'Max 280 characters (about 3 lines on the card)']
+      - name: buttonLabel
+        label: Button label (optional)
+        widget: string
+        i18n: true
+        required: false
+        hint: Needed together with the button URL. Max 24 characters.
+        pattern: ['^.{0,24}$', 'Max 24 characters']
+      - name: buttonUrl
+        label: Button URL (optional)
+        widget: string
+        required: false
+        hint: https:// only — discord.gg, discord.com, store.steampowered.com, steamcommunity.com, github.com, *.github.io
+        pattern: ['^https://', 'Must start with https://']

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handwriter.github.io/combatmap-news/schema/news-feed.schema.json",
+  "title": "Combat Map news feed v1",
+  "description": "Contract between the publish pipeline and the game client (NewsFeedDto.cs). Additive changes only; breaking changes go to /v2/.",
+  "type": "object",
+  "required": ["schemaVersion", "generatedAt", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "items": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en"],
+      "propertyNames": { "enum": ["en", "ru", "tr", "fr", "ar"] },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "version": { "type": "string", "pattern": "^\\d+(\\.\\d+)*$" },
+    "item": {
+      "type": "object",
+      "required": ["id", "type", "priority", "publishedAt", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "type": { "enum": ["news", "event", "update"] },
+        "priority": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "draft": { "const": true, "description": "Present only in news.preview.json." },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "startsAt": { "type": "string", "format": "date-time" },
+        "endsAt": { "type": "string", "format": "date-time" },
+        "minGameVersion": { "$ref": "#/$defs/version" },
+        "maxGameVersion": { "$ref": "#/$defs/version" },
+        "image": {
+          "type": "object",
+          "required": ["url", "width", "height"],
+          "additionalProperties": false,
+          "properties": {
+            "url": { "type": "string", "pattern": "^img/[0-9a-f]{40}\\.jpg$" },
+            "width": { "type": "integer" },
+            "height": { "type": "integer" }
+          }
+        },
+        "title": { "$ref": "#/$defs/localized" },
+        "text": { "$ref": "#/$defs/localized" },
+        "button": {
+          "type": "object",
+          "required": ["label", "url"],
+          "additionalProperties": false,
+          "properties": {
+            "label": { "$ref": "#/$defs/localized" },
+            "url": { "type": "string", "pattern": "^https://" }
+          }
+        }
+      }
+    }
+  }
+}

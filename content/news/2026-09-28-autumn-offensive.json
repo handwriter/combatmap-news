@@ -1,0 +1,20 @@
+{
+  "en": {
+    "draft": true,
+    "type": "event",
+    "priority": 10,
+    "publishedAt": "2026-09-28T10:00:00.000Z",
+    "startsAt": "2026-09-28T10:00:00.000Z",
+    "endsAt": "2026-10-06T00:00:00.000Z",
+    "image": "/media/autumn-offensive.png",
+    "title": "Autumn Offensive — 2v2 tournament",
+    "text": "Weekend tournament on Europe_1. Sign up in our Discord before October 3 — the winning team gets a unique flag for their army.",
+    "buttonLabel": "Join on Discord",
+    "buttonUrl": "https://discord.gg/q9pkrkHKvY"
+  },
+  "ru": {
+    "title": "Осеннее наступление — турнир 2×2",
+    "text": "Турнир выходного дня на карте Europe_1. Запишитесь в нашем Discord до 3 октября — команда-победитель получит уникальный флаг для своей армии.",
+    "buttonLabel": "Discord"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "_comment": "Hosts a news button may link to (the host itself or any subdomain). Keep in sync with NewsUrlPolicy.cs in the game.",
+  "hosts": [
+    "discord.gg",
+    "discord.com",
+    "store.steampowered.com",
+    "steamcommunity.com",
+    "github.com",
+    "github.io"
+  ]
+}

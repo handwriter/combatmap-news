@@ -1,0 +1,14 @@
+{
+  "en": {
+    "draft": true,
+    "type": "update",
+    "priority": 0,
+    "publishedAt": "2026-09-27T12:00:00.000Z",
+    "title": "Update — battle replays",
+    "text": "Every battle is now saved automatically. Rewatch your matches from the main menu."
+  },
+  "ru": {
+    "title": "Обновление — реплеи боёв",
+    "text": "Каждый бой теперь сохраняется автоматически. Пересматривайте свои матчи из главного меню."
+  }
+}
