@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-09-28T12:01:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "",
+    "title": "Проверка(Арс)",
+    "text": "",
+    "buttonUrl": ""
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
