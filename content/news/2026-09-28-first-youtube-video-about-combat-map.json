@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-09-28T16:09:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/Frame 59(1).png",
+    "title": "First YouTube video about Combat Map",
+    "text": "First look at the game from a newcomer's view: how to play and what to do in your first match.",
+    "buttonUrl": "https://www.youtube.com/watch?v=eNrH6Tb9f1s&t=431s"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
