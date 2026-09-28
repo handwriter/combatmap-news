@@ -29,7 +29,7 @@ collections:
     label_singular: News item
     description: >-
       Cards in the game's main menu. Only "Title (en)" and "Published at" are required —
-      empty image / text / button blocks are simply not shown. Keep "Draft" on to preview
+      empty image / text blocks are simply not shown, the whole card is the link. Keep "Draft" on to preview
       in dev builds (news.preview.json), switch it off to publish to players.
     folder: content/news
     format: json
@@ -62,7 +62,7 @@ collections:
         min: 0
         max: 100
         default: 0
-        hint: Higher is shown first; equal priority → newest first. The menu shows up to 4 items.
+        hint: Higher is shown first; equal priority → newest first. The menu shows up to 10 items.
       - name: publishedAt
         label: Published at
         widget: datetime
@@ -106,17 +106,10 @@ collections:
         widget: text
         i18n: true
         required: false
-        pattern: ['^[\s\S]{0,280}$', 'Max 280 characters (about 3 lines on the card)']
-      - name: buttonLabel
-        label: Button label (optional)
-        widget: string
-        i18n: true
-        required: false
-        hint: Needed together with the button URL. Max 24 characters.
-        pattern: ['^.{0,24}$', 'Max 24 characters']
+        pattern: ['^[\s\S]{0,280}$', 'Max 280 characters (about 5 lines on the card)']
       - name: buttonUrl
-        label: Button URL (optional)
+        label: Link (optional)
         widget: string
         required: false
-        hint: Any https:// link. Needs a button label too.
+        hint: Any https:// link. The whole card opens it in the browser; without a link the card is not clickable.
         pattern: ['^https://', 'Must start with https://']

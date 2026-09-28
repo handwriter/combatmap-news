@@ -45,15 +45,7 @@
         },
         "title": { "$ref": "#/$defs/localized" },
         "text": { "$ref": "#/$defs/localized" },
-        "button": {
-          "type": "object",
-          "required": ["label", "url"],
-          "additionalProperties": false,
-          "properties": {
-            "label": { "$ref": "#/$defs/localized" },
-            "url": { "type": "string", "pattern": "^https://" }
-          }
-        }
+        "url": { "type": "string", "pattern": "^https://", "description": "Link opened when the card is clicked." }
       }
     }
   }

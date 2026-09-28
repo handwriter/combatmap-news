@@ -17,7 +17,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const LOCALES = ['en', 'ru', 'tr', 'fr', 'ar'];
 export const DEFAULT_LOCALE = 'en';
 export const TYPES = ['news', 'event', 'update'];
-export const LIMITS = { title: 80, text: 280, buttonLabel: 24 };
+export const LIMITS = { title: 80, text: 280 };
 export const IMAGE_SIZE = { width: 640, height: 360 };
 /** Expired items stay in the feed for a week so clients with a slightly wrong clock still hide them themselves. */
 export const EXPIRED_GRACE_MS = 7 * 24 * 60 * 60 * 1000;
@@ -27,7 +27,7 @@ const VERSION_PATTERN = /^\d+(\.\d+)*$/;
 
 const isBlank = (v) => v === undefined || v === null || (typeof v === 'string' && v.trim() === '');
 
-export function isValidButtonUrl(url) {
+export function isValidLinkUrl(url) {
   try {
     const parsed = new URL(url);
     return parsed.protocol === 'https:' && parsed.hostname !== '';
@@ -107,16 +107,11 @@ export function normalizeEntry(id, raw) {
   entry.title = localized(raw, 'title', errors);
   if (!entry.title[DEFAULT_LOCALE]) errors.push('title.en: required');
   entry.text = localized(raw, 'text', errors);
-  entry.buttonLabel = localized(raw, 'buttonLabel', errors);
-
+  // The whole card is the link (no button in the UI). The CMS field keeps its historical
+  // name "buttonUrl"; "buttonLabel" from older entries is ignored.
   if (!isBlank(base.buttonUrl)) {
-    entry.buttonUrl = String(base.buttonUrl).trim();
-    if (!isValidButtonUrl(entry.buttonUrl)) {
-      errors.push(`buttonUrl: "${entry.buttonUrl}" must be a valid https:// link`);
-    }
-    if (!entry.buttonLabel[DEFAULT_LOCALE]) errors.push('buttonLabel.en: required when buttonUrl is set');
-  } else if (Object.keys(entry.buttonLabel).length > 0) {
-    errors.push('buttonUrl: required when buttonLabel is set');
+    entry.url = String(base.buttonUrl).trim();
+    if (!isValidLinkUrl(entry.url)) errors.push(`buttonUrl: "${entry.url}" must be a valid https:// link`);
   }
 
   return { errors, entry };
@@ -138,7 +133,7 @@ export function buildFeed(entries, { includeDrafts, now, images }) {
       if (e.image) item.image = images.get(e.image);
       item.title = e.title;
       if (Object.keys(e.text).length > 0) item.text = e.text;
-      if (e.buttonUrl) item.button = { label: e.buttonLabel, url: e.buttonUrl };
+      if (e.url) item.url = e.url;
       return item;
     });
   return { schemaVersion: 1, generatedAt: now.toISOString(), items };
