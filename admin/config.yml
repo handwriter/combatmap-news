@@ -29,8 +29,8 @@ collections:
     label_singular: News item
     description: >-
       Cards in the game's main menu. Only "Title (en)" and "Published at" are required —
-      empty image / text blocks are simply not shown, the whole card is the link. Keep "Draft" on to preview
-      in dev builds (news.preview.json), switch it off to publish to players.
+      empty image / text blocks are simply not shown, the whole card is the link. Saving publishes to players
+      in about 1–2 minutes; use "Show from" to schedule an item.
     folder: content/news
     format: json
     extension: json
@@ -38,15 +38,10 @@ collections:
     delete: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     identifier_field: title
-    summary: '{{title}} · {{type}} · {{publishedAt | date("YYYY-MM-DD")}}{{draft | ternary(" · DRAFT", "")}}'
+    summary: '{{title}} · {{type}} · {{publishedAt | date("YYYY-MM-DD")}}'
     sortable_fields: [publishedAt, priority, title]
     i18n: true
     fields:
-      - name: draft
-        label: Draft (hidden from players)
-        widget: boolean
-        default: true
-        hint: Drafts are only visible in dev builds. Switch off and save to publish.
       - name: type
         label: Type
         widget: select

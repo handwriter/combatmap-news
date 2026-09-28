@@ -1,5 +1,5 @@
 // Builds the published site (dist/) from the CMS content:
-//   content/news/*.json  ->  dist/v1/news.json, dist/v1/news.preview.json, dist/v1/img/*.jpg
+//   content/news/*.json  ->  dist/v1/news.json, dist/v1/img/*.jpg
 //   admin/               ->  dist/admin/
 // Any invalid entry fails the build, so a broken edit never reaches players:
 // the previous deployment stays live until the entry is fixed.
@@ -77,7 +77,8 @@ export function normalizeEntry(id, raw) {
     return { errors: [`missing "${DEFAULT_LOCALE}" section — is this a CMS news file?`] };
   }
 
-  const entry = { id, draft: base.draft !== false };
+  // Every saved entry is published: the feed has a single source, no drafts.
+  const entry = { id };
 
   entry.type = isBlank(base.type) ? 'news' : base.type;
   if (!TYPES.includes(entry.type)) errors.push(`type: "${entry.type}" must be one of ${TYPES.join(', ')}`);
@@ -118,14 +119,12 @@ export function normalizeEntry(id, raw) {
 }
 
 /** Selects, orders and shapes entries for the feed. `images` maps entry.image -> { url, width, height }. */
-export function buildFeed(entries, { includeDrafts, now, images }) {
+export function buildFeed(entries, { now, images }) {
   const items = entries
-    .filter((e) => includeDrafts || !e.draft)
     .filter((e) => !e.endsAt || Date.parse(e.endsAt) + EXPIRED_GRACE_MS > now.getTime())
     .sort((a, b) => b.priority - a.priority || b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))
     .map((e) => {
       const item = { id: e.id, type: e.type, priority: e.priority };
-      if (e.draft) item.draft = true;
       item.publishedAt = e.publishedAt;
       for (const key of ['startsAt', 'endsAt', 'minGameVersion', 'maxGameVersion']) {
         if (e[key]) item[key] = e[key];
@@ -207,15 +206,14 @@ async function main() {
   const validate = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/news-feed.schema.json'), 'utf8')));
 
   const now = new Date();
-  for (const [name, includeDrafts] of [['news.json', false], ['news.preview.json', true]]) {
-    const feed = buildFeed(entries, { includeDrafts, now, images });
-    if (!validate(feed)) {
-      console.error(`${name} does not match the feed schema:`, validate.errors);
-      process.exit(1);
-    }
-    await writeFile(path.join(dist, 'v1', name), `${JSON.stringify(feed, null, 2)}\n`);
-    console.log(`v1/${name}: ${feed.items.length} item(s)`);
+  const feed = buildFeed(entries, { now, images });
+  if (!validate(feed)) {
+    console.error('news.json does not match the feed schema:', validate.errors);
+    process.exit(1);
   }
+  await writeFile(path.join(dist, 'v1', 'news.json'), `${JSON.stringify(feed, null, 2)}\n`);
+  console.log(`v1/news.json: ${feed.items.length} item(s)`);
+
 
   await cp(path.join(ROOT, 'admin'), path.join(dist, 'admin'), { recursive: true });
   await cp(path.join(ROOT, 'site'), dist, { recursive: true });

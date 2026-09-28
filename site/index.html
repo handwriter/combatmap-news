@@ -20,12 +20,10 @@
       .meta-line { color: var(--muted); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 12px; }
       .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 440px)); gap: 12px; }
       .card { background: var(--card); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-      .card.draft { outline: 2px dashed var(--brown); }
       .card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid var(--frame); }
       .row { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 13px; }
       .badge { color: #f0f7f0; font-size: 11px; font-weight: 600; letter-spacing: .8px; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
       .badge.event { background: var(--green); } .badge.update { background: var(--brown); } .badge.news { background: var(--muted); }
-      .badge.draft { background: transparent; color: var(--brown); border: 1px solid var(--brown); }
       .title { font-size: 17px; font-weight: 600; margin: 0; }
       .text { color: var(--muted); margin: 0; white-space: pre-line; }
       .card.link { cursor: pointer; } .card.link:hover { background: #b1bd9b; }
@@ -37,10 +35,6 @@
       <header>
         <h1>Combat Map — news</h1>
         <div class="controls">
-          <select id="feed" aria-label="Feed">
-            <option value="v1/news.json">Live (players)</option>
-            <option value="v1/news.preview.json">Preview (with drafts)</option>
-          </select>
           <select id="lang" aria-label="Language">
             <option>en</option><option>ru</option><option>tr</option><option>fr</option><option>ar</option>
           </select>
@@ -57,7 +51,7 @@
       let renderToken = 0;
       async function render() {
         const token = ++renderToken;
-        const feedPath = document.getElementById('feed').value;
+        const feedPath = 'v1/news.json';
         const cards = document.getElementById('cards');
         const meta = document.getElementById('meta');
         let feed;
@@ -78,11 +72,10 @@
         if (feed.items.length === 0) { cards.append(el('div', 'empty', 'No news — the panel is hidden in the game.')); return; }
         const base = feedPath.slice(0, feedPath.lastIndexOf('/') + 1);
         for (const item of feed.items) {
-          const card = el('article', `card${item.draft ? ' draft' : ''}`);
+          const card = el('article', `card`);
           if (item.image) { const img = el('img'); img.src = base + item.image.url; img.alt = ''; card.append(img); }
           const row = el('div', 'row');
           row.append(el('span', `badge ${item.type}`, item.type));
-          if (item.draft) row.append(el('span', 'badge draft', 'draft'));
           const dates = [item.startsAt || item.publishedAt, item.endsAt].filter(Boolean).map((d) => new Date(d).toLocaleDateString());
           row.append(el('span', null, dates.join(' – ')));
           card.append(row, el('h2', 'title', pick(item.title, lang)));
@@ -95,7 +88,6 @@
           cards.append(card);
         }
       }
-      document.getElementById('feed').addEventListener('change', render);
       document.getElementById('lang').addEventListener('change', render);
       render();
     </script>

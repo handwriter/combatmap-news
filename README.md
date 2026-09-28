@@ -8,7 +8,6 @@
 | Редактор (Sveltia CMS) | https://handwriter.github.io/combatmap-news/admin/ |
 | Предпросмотр карточек | https://handwriter.github.io/combatmap-news/ |
 | Фид для игроков | https://handwriter.github.io/combatmap-news/v1/news.json |
-| Фид с черновиками (dev-сборки) | https://handwriter.github.io/combatmap-news/v1/news.preview.json |
 
 ## Как опубликовать новость
 
@@ -16,10 +15,9 @@
 2. **News → New News item**. Обязательны только **Title (en)** и **Published at**; картинка,
    текст и ссылка — по желанию (пустые блоки в карточке не показываются; вся карточка — ссылка). Переводы ru / tr / fr / ar
    — на вкладках языков; чего нет, игроки увидят на английском.
-3. Оставить **Draft** включённым и сохранить → новость появится в `news.preview.json`
-   (dev-сборки игры и страница предпросмотра в режиме *Preview*).
-4. Выключить **Draft** и сохранить → через 1–2 минуты новость в `news.json`, игроки увидят её
-   при следующем входе в главное меню (CDN GitHub Pages кэширует до 10 минут).
+3. Сохранить → через 1–2 минуты новость в `news.json`, игроки увидят её при следующем входе
+   в главное меню (CDN GitHub Pages кэширует до 10 минут). Черновиков нет: сохранённое сразу
+   публикуется, заранее подготовленную новость прячьте полем **Show from**.
 
 Показ по расписанию — поля **Show from / Show until** (UTC): новость можно выложить заранее,
 игра сама покажет и скроет её. Ограничение по версии игры — **Min / Max game version** (`0.107`).
@@ -54,7 +52,7 @@ scripts/build.mjs валидация + сборка dist/ (картинки → 
 ```bash
 npm ci
 npm test
-npm run build   # dist/v1/news.json, dist/v1/news.preview.json, dist/v1/img/*.jpg
+npm run build   # dist/v1/news.json, dist/v1/img/*.jpg
 ```
 
 Совместимость: фид лежит под `/v1/`. Добавлять новые необязательные поля можно;
