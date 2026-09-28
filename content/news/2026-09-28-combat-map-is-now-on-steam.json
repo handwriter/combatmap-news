@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 12,
+    "publishedAt": "2026-09-28T15:49:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/Frame 58.png",
+    "title": "Combat Map is now on Steam!",
+    "text": "Our Steam page is live. Add the game to your wishlist to support us and get notified on release.",
+    "buttonUrl": "https://store.steampowered.com/app/4885940/Combat_Map/"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
