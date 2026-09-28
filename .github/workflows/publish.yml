@@ -9,7 +9,6 @@ on:
       - 'site/**'
       - 'schema/**'
       - 'scripts/**'
-      - 'allowed-hosts.json'
       - 'package*.json'
       - '.github/workflows/publish.yml'
   schedule:

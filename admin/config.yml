@@ -118,5 +118,5 @@ collections:
         label: Button URL (optional)
         widget: string
         required: false
-        hint: https:// only — discord.gg, discord.com, store.steampowered.com, steamcommunity.com, github.com, *.github.io
+        hint: Any https:// link. Needs a button label too.
         pattern: ['^https://', 'Must start with https://']

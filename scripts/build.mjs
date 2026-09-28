@@ -27,16 +27,13 @@ const VERSION_PATTERN = /^\d+(\.\d+)*$/;
 
 const isBlank = (v) => v === undefined || v === null || (typeof v === 'string' && v.trim() === '');
 
-export function isAllowedUrl(url, allowedHosts) {
-  let parsed;
+export function isValidButtonUrl(url) {
   try {
-    parsed = new URL(url);
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' && parsed.hostname !== '';
   } catch {
     return false;
   }
-  if (parsed.protocol !== 'https:') return false;
-  const host = parsed.hostname.toLowerCase();
-  return allowedHosts.some((h) => host === h || host.endsWith(`.${h}`));
 }
 
 function parseDate(value, field, errors) {
@@ -71,7 +68,7 @@ function localized(raw, field, errors) {
  * Validates one CMS entry (Sveltia i18n "single_file": { en: {...all fields}, ru: {...translations} })
  * and returns it normalized. Non-translatable fields live under the default locale.
  */
-export function normalizeEntry(id, raw, allowedHosts) {
+export function normalizeEntry(id, raw) {
   const errors = [];
   if (!ID_PATTERN.test(id)) errors.push(`file name "${id}" must be lowercase latin, digits and dashes`);
 
@@ -114,8 +111,8 @@ export function normalizeEntry(id, raw, allowedHosts) {
 
   if (!isBlank(base.buttonUrl)) {
     entry.buttonUrl = String(base.buttonUrl).trim();
-    if (!isAllowedUrl(entry.buttonUrl, allowedHosts)) {
-      errors.push(`buttonUrl: "${entry.buttonUrl}" must be https:// on ${allowedHosts.join(', ')}`);
+    if (!isValidButtonUrl(entry.buttonUrl)) {
+      errors.push(`buttonUrl: "${entry.buttonUrl}" must be a valid https:// link`);
     }
     if (!entry.buttonLabel[DEFAULT_LOCALE]) errors.push('buttonLabel.en: required when buttonUrl is set');
   } else if (Object.keys(entry.buttonLabel).length > 0) {
@@ -158,7 +155,7 @@ export async function renderImage(sourcePath) {
   return { hash, buffer };
 }
 
-async function readEntries(allowedHosts) {
+async function readEntries() {
   const dir = path.join(ROOT, 'content/news');
   const files = (await readdir(dir).catch(() => [])).filter((f) => f.endsWith('.json')).sort();
   const entries = [];
@@ -172,7 +169,7 @@ async function readEntries(allowedHosts) {
       problems.push(`content/news/${file}: invalid JSON — ${err.message}`);
       continue;
     }
-    const { errors, entry } = normalizeEntry(id, raw, allowedHosts);
+    const { errors, entry } = normalizeEntry(id, raw);
     if (errors.length > 0) problems.push(...errors.map((e) => `content/news/${file}: ${e}`));
     else entries.push(entry);
   }
@@ -180,8 +177,7 @@ async function readEntries(allowedHosts) {
 }
 
 async function main() {
-  const { hosts } = JSON.parse(await readFile(path.join(ROOT, 'allowed-hosts.json'), 'utf8'));
-  const { entries, problems } = await readEntries(hosts);
+  const { entries, problems } = await readEntries();
 
   // Images: CMS stores "/media/<file>" (public_folder) for files in content/media (media_folder).
   const images = new Map();

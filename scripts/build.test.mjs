@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { buildFeed, isAllowedUrl, normalizeEntry } from './build.mjs';
+import { buildFeed, isValidButtonUrl, normalizeEntry } from './build.mjs';
 
-const HOSTS = ['discord.gg', 'store.steampowered.com', 'github.io'];
 
 const valid = (overrides = {}, translations = {}) => ({
   en: {
@@ -20,7 +19,7 @@ const valid = (overrides = {}, translations = {}) => ({
 });
 
 test('valid entry is normalized with translations', () => {
-  const { errors, entry } = normalizeEntry('2026-09-28-autumn', valid({}, { ru: { title: 'Осеннее наступление' } }), HOSTS);
+  const { errors, entry } = normalizeEntry('2026-09-28-autumn', valid({}, { ru: { title: 'Осеннее наступление' } }));
   assert.deepEqual(errors, []);
   assert.deepEqual(entry.title, { en: 'Autumn Offensive', ru: 'Осеннее наступление' });
   assert.equal(entry.buttonUrl, 'https://discord.gg/q9pkrkHKvY');
@@ -30,7 +29,7 @@ test('valid entry is normalized with translations', () => {
 test('only title.en and publishedAt are required; blank optional fields are dropped', () => {
   const { errors, entry } = normalizeEntry('minimal', {
     en: { publishedAt: '2026-09-28', title: 'Hi', text: '', buttonLabel: '', buttonUrl: '', image: '', startsAt: null },
-  }, HOSTS);
+  });
   assert.deepEqual(errors, []);
   assert.equal(entry.type, 'news');
   assert.equal(entry.priority, 0);
@@ -41,7 +40,7 @@ test('only title.en and publishedAt are required; blank optional fields are drop
 });
 
 test('missing english title fails', () => {
-  const { errors } = normalizeEntry('x', valid({ title: '' }, { ru: { title: 'Только русский' } }), HOSTS);
+  const { errors } = normalizeEntry('x', valid({ title: '' }, { ru: { title: 'Только русский' } }));
   assert.ok(errors.includes('title.en: required'));
 });
 
@@ -52,29 +51,28 @@ test('limits, dates, versions and button pairing are checked', () => {
     endsAt: '2026-10-01T00:00:00Z',
     minGameVersion: 'v1',
     buttonLabel: '',
-  }), HOSTS);
+  }));
   assert.ok(errors.some((e) => e.startsWith('title.en: 81 chars')));
   assert.ok(errors.includes('endsAt: must be later than startsAt'));
   assert.ok(errors.some((e) => e.startsWith('minGameVersion')));
   assert.ok(errors.includes('buttonLabel.en: required when buttonUrl is set'));
 });
 
-test('button url must be https on an allowed host', () => {
-  assert.ok(normalizeEntry('x', valid({ buttonUrl: 'http://discord.gg/abc' }), HOSTS).errors.length > 0);
-  assert.ok(normalizeEntry('x', valid({ buttonUrl: 'https://evil.example/discord.gg' }), HOSTS).errors.length > 0);
-  assert.ok(isAllowedUrl('https://handwriter.github.io/combatmap-news/', HOSTS));
-  assert.ok(isAllowedUrl('https://store.steampowered.com/app/4929920', HOSTS));
-  assert.ok(!isAllowedUrl('https://notgithub.io/', HOSTS));
-  assert.ok(!isAllowedUrl('javascript:alert(1)', HOSTS));
+test('button url must be a valid https link on any host', () => {
+  assert.ok(normalizeEntry('x', valid({ buttonUrl: 'http://discord.gg/abc' })).errors.length > 0);
+  assert.deepEqual(normalizeEntry('x', valid({ buttonUrl: 'https://test.com' })).errors, []);
+  assert.ok(isValidButtonUrl('https://store.steampowered.com/app/4929920'));
+  assert.ok(!isValidButtonUrl('https://'));
+  assert.ok(!isValidButtonUrl('javascript:alert(1)'));
 });
 
 test('bad file names are rejected', () => {
-  assert.ok(normalizeEntry('Autumn News', valid(), HOSTS).errors.some((e) => e.startsWith('file name')));
+  assert.ok(normalizeEntry('Autumn News', valid()).errors.some((e) => e.startsWith('file name')));
 });
 
 test('feed hides drafts and long-expired items and sorts by priority then date', () => {
   const now = new Date('2026-10-20T00:00:00Z');
-  const make = (id, en) => normalizeEntry(id, valid(en), HOSTS).entry;
+  const make = (id, en) => normalizeEntry(id, valid(en)).entry;
   const entries = [
     make('old', { priority: 0, publishedAt: '2026-09-01T00:00:00Z' }),
     make('new', { priority: 0, publishedAt: '2026-10-01T00:00:00Z' }),
@@ -94,7 +92,7 @@ test('feed hides drafts and long-expired items and sorts by priority then date',
 });
 
 test('feed item omits absent optional blocks', () => {
-  const { entry } = normalizeEntry('bare', { en: { draft: false, publishedAt: '2026-09-28', title: 'Hi' } }, HOSTS);
+  const { entry } = normalizeEntry('bare', { en: { draft: false, publishedAt: '2026-09-28', title: 'Hi' } });
   const [item] = buildFeed([entry], { includeDrafts: false, now: new Date('2026-09-29'), images: new Map() }).items;
   assert.deepEqual(Object.keys(item), ['id', 'type', 'priority', 'publishedAt', 'title']);
 });
