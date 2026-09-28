@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-09-28T14:20:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/gitflow.png",
+    "title": "Super pic test",
+    "text": "BBBBBBBBBBBBB",
+    "buttonUrl": ""
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
