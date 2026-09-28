@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-09-28T14:23:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/0dddadac-2bb7-4058-8c9f-11ea3b690e0f.png",
+    "title": "ABOBA",
+    "text": "bbb",
+    "buttonUrl": ""
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
