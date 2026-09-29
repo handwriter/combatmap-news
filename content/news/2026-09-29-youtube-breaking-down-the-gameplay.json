@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-09-29T14:07:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/Frame 59(2).png",
+    "title": "YouTube: Breaking down the gameplay",
+    "text": "How to manage research, use horses for flank containment, and master unit recruitment",
+    "buttonUrl": "https://www.youtube.com/watch?v=1QQL-GuiV6w"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
