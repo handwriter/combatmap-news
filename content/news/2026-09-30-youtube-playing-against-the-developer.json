@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-09-30T06:09:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/Frame 59(3).png",
+    "title": "YouTube: Playing against the developer",
+    "text": "A tough match against the game's creator with tank pushes and a naval landing.",
+    "buttonUrl": "https://www.youtube.com/watch?v=zBYV6R1TMyk&t=384s"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
