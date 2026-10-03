@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "update",
+    "priority": 0,
+    "publishedAt": "2026-10-03T15:48:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "",
+    "title": "New Map: British Isles",
+    "text": "",
+    "buttonUrl": ""
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
