@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-10-04T13:37:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/изображение 27(1).png",
+    "title": "YouTube: A Beginner's Perspective: Breaking Down the Gameplay",
+    "text": "Battling bots on the Europe and British Isles maps",
+    "buttonUrl": "https://www.youtube.com/watch?v=_1ueSgzzfR0"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
