@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-10-05T11:00:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/pasted-image-1791198108222.png",
+    "title": "In this game, if you make a mistake, it's all over",
+    "text": "In the previous video, I faced off against the developer on the combat map and lost. Now, we’ve clashed in a duel once again! This time, I put what I’d learned into practice, and the battle turned out to be far more intense.",
+    "buttonUrl": "https://www.youtube.com/watch?v=OgkzheWSGpk&t=408s"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
