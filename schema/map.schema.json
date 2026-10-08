@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Combat Map JSON v1",
+  "type": "object",
+  "required": [
+    "id",
+    "maxPlayers",
+    "cameraBounds",
+    "terrain",
+    "players"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "maxPlayers": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 8
+    },
+    "maxUnitsPerPlayer": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cameraBounds": {
+      "$ref": "#/$defs/bounds"
+    },
+    "mapBounds": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/bounds"
+        },
+        {
+          "type": "object",
+          "required": [],
+          "properties": {
+            "cx": {
+              "type": "number"
+            },
+            "cy": {
+              "type": "number"
+            },
+            "sx": {
+              "type": "number"
+            },
+            "sy": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "terrain": {
+      "$ref": "#/$defs/terrain"
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/player"
+      }
+    },
+    "bridges": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/bridge"
+      }
+    }
+  },
+  "$defs": {
+    "bounds": {
+      "type": "object",
+      "required": [
+        "cx",
+        "cy",
+        "sx",
+        "sy"
+      ],
+      "properties": {
+        "cx": {
+          "type": "number"
+        },
+        "cy": {
+          "type": "number"
+        },
+        "sx": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "sy": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "terrain": {
+      "type": "object",
+      "required": [
+        "gridWidth",
+        "gridHeight",
+        "cells"
+      ],
+      "properties": {
+        "gridWidth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "gridHeight": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+          },
+          "maxItems": 1048576
+        },
+        "trees": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/tree"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "tree": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "variant",
+        "scale",
+        "flipX"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "variant": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "flipX": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "player": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "spawnPoints": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/spawn"
+          }
+        },
+        "cities": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/city"
+          }
+        },
+        "startingZones": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/zone"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "spawn": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "unitTypeId"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "unitTypeId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "city": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "cityId"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "cityId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isCapital": {
+          "type": "boolean"
+        },
+        "startsNeutral": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "zone": {
+      "type": "object",
+      "required": [
+        "px",
+        "py",
+        "cx",
+        "cy",
+        "sx",
+        "sy"
+      ],
+      "properties": {
+        "px": {
+          "type": "number"
+        },
+        "py": {
+          "type": "number"
+        },
+        "cx": {
+          "type": "number"
+        },
+        "cy": {
+          "type": "number"
+        },
+        "sx": {
+          "type": "number"
+        },
+        "sy": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "bridge": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "rotation"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "rotation": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 0
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

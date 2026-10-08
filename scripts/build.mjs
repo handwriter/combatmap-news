@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import sharp from 'sharp';
+import { buildMaps } from './maps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -172,6 +173,9 @@ async function readEntries() {
 
 async function main() {
   const { entries, problems } = await readEntries();
+  const now = new Date();
+  const maps = await buildMaps(ROOT, now);
+  problems.push(...maps.problems);
 
   // Images: CMS stores "/media/<file>" (public_folder) for files in content/media (media_folder).
   const images = new Map();
@@ -190,27 +194,33 @@ async function main() {
   }
 
   if (problems.length > 0) {
-    console.error(`News build failed (${problems.length} problem(s)):\n  ${problems.join('\n  ')}`);
+    console.error(`Content build failed (${problems.length} problem(s)):\n  ${problems.join('\n  ')}`);
     process.exit(1);
-  }
-
-  const dist = path.join(ROOT, 'dist');
-  await rm(dist, { recursive: true, force: true });
-  await mkdir(path.join(dist, 'v1/img'), { recursive: true });
-  for (const [hash, buffer] of rendered) {
-    await writeFile(path.join(dist, 'v1/img', `${hash}.jpg`), buffer);
   }
 
   const ajv = new Ajv({ allErrors: true });
   addFormats(ajv);
   const validate = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/news-feed.schema.json'), 'utf8')));
 
-  const now = new Date();
   const feed = buildFeed(entries, { now, images });
   if (!validate(feed)) {
     console.error('news.json does not match the feed schema:', validate.errors);
     process.exit(1);
   }
+  const validateMaps = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/maps-feed.schema.json'), 'utf8')));
+  if (!validateMaps(maps.feed)) {
+    console.error('maps.json does not match the catalog schema:', validateMaps.errors);
+    process.exit(1);
+  }
+  // Nothing replaces the previous output until BOTH feeds and every enabled map are valid.
+  const dist = path.join(ROOT, 'dist');
+  await rm(dist, { recursive: true, force: true });
+  await mkdir(path.join(dist, 'v1/img'), { recursive: true });
+  await mkdir(path.join(dist, 'v1/maps'), { recursive: true });
+  for (const [hash, buffer] of rendered) await writeFile(path.join(dist, 'v1/img', `${hash}.jpg`), buffer);
+  for (const [hash, text] of maps.payloads) await writeFile(path.join(dist, 'v1/maps', `${hash}.json`), text);
+  await writeFile(path.join(dist, 'v1/maps.json'), `${JSON.stringify(maps.feed, null, 2)}\n`);
+  console.log(`v1/maps.json: ${maps.feed.items.length} map(s)`);
   await writeFile(path.join(dist, 'v1', 'news.json'), `${JSON.stringify(feed, null, 2)}\n`);
   console.log(`v1/news.json: ${feed.items.length} item(s)`);
 

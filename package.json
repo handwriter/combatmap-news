@@ -2,13 +2,13 @@
   "name": "combatmap-news",
   "private": true,
   "type": "module",
-  "description": "News feed for the Combat Map main menu, edited with Sveltia CMS and published to GitHub Pages.",
+  "description": "News and official maps for Combat Map, edited with Sveltia CMS and published to GitHub Pages.",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node --test scripts/"
+    "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {
     "ajv": "^8.17.1",

@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Combat Map — News preview</title>
+    <link rel="icon" href="data:," />
+    <title>Combat Map — Content preview</title>
     <style>
       :root { --bg: #ede8dc; --card: #d8d0be; --ink: #1a1208; --muted: #6b5a40; --line: #a09070;
               --green: #2e7d32; --brown: #8b4513; --frame: #8c7c60; --ph: #c0b7a5; }
@@ -38,11 +39,14 @@
           <select id="lang" aria-label="Language">
             <option>en</option><option>ru</option><option>tr</option><option>fr</option><option>ar</option>
           </select>
-          <a class="btn" href="admin/">Edit news →</a>
+          <a class="btn" href="admin/">Edit content →</a>
         </div>
       </header>
       <p class="meta-line" id="meta">Loading…</p>
       <div class="grid" id="cards"></div>
+      <h1 style="margin:32px 0 16px">Official maps</h1>
+      <p class="meta-line" id="maps-meta">Loading maps…</p>
+      <div class="grid" id="maps"></div>
     </main>
     <script>
       const pick = (map, lang) => map && (map[lang] || map.en);
@@ -90,6 +94,32 @@
       }
       document.getElementById('lang').addEventListener('change', render);
       render();
+
+      async function renderMaps() {
+        const list = document.getElementById('maps');
+        const meta = document.getElementById('maps-meta');
+        try {
+          const response = await fetch('v1/maps.json', { cache: 'no-store' });
+          if (!response.ok) throw new Error('Catalog unavailable');
+          const feed = await response.json();
+          if (feed.schemaVersion !== 1 || !Array.isArray(feed.items)) throw new Error('Unsupported catalog');
+          meta.textContent = `${feed.items.length} map(s) · generated ${new Date(feed.generatedAt).toLocaleString()}`;
+          if (!feed.items.length) list.append(el('div', 'empty', 'Official pool is empty. Personal maps remain available in the game.'));
+          for (const map of feed.items) {
+            const card = el('article', 'card');
+            card.append(el('h2', 'title', map.name));
+            card.append(el('p', 'text', `${map.maxPlayers} players · ${map.maxUnitsPerPlayer > 0 ? map.maxUnitsPerPlayer + ' units per player' : 'unlimited units'}`));
+            const link = el('a', 'btn', 'Download JSON');
+            link.href = 'v1/' + map.url;
+            link.download = map.id + '.json';
+            card.append(link);
+            list.append(card);
+          }
+        } catch {
+          meta.textContent = 'Map catalog unavailable';
+        }
+      }
+      renderMaps();
     </script>
   </body>
 </html>

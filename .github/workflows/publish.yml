@@ -1,4 +1,4 @@
-name: Publish news
+name: Publish game content
 
 on:
   push:

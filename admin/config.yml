@@ -24,6 +24,41 @@ i18n:
   default_locale: en
 
 collections:
+  - name: maps
+    label: Maps
+    label_singular: Map
+    description: >-
+      Official map pool. Upload a JSON map saved by the game's editor. Saving publishes
+      automatically; disable a map to temporarily remove it from the pool. Keep the entry
+      filename unchanged when renaming or replacing a map: it is its permanent ID.
+    folder: content/maps
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    identifier_field: title
+    summary: '{{title}} · enabled: {{enabled}} · order: {{order}}'
+    sortable_fields: [order, title, enabled]
+    i18n: false
+    fields:
+      - { name: title, label: Name, widget: string, pattern: ['^.{1,80}$', 'Max 80 characters'] }
+      - name: file
+        label: Map JSON
+        widget: file
+        accept: .json
+        choose_url: false
+        media_folder: /content/map-files
+        public_folder: /map-files
+        hint: Upload a JSON file from the game. Replacing the file keeps this map's catalog ID.
+      - { name: enabled, label: Enabled, widget: boolean, default: true }
+      - name: order
+        label: Order
+        widget: number
+        value_type: int
+        min: 0
+        default: 0
+        hint: Lower values appear first; equal values are ordered by permanent ID.
   - name: news
     label: News
     label_singular: News item

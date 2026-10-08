@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Combat Map map catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "items"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "maxPlayers",
+          "maxUnitsPerPlayer",
+          "url",
+          "hash",
+          "byteSize"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{0,79}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxPlayers": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 8
+          },
+          "maxUnitsPerPlayer": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^maps/[0-9a-f]{16}\\.json$"
+          },
+          "hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{16}$"
+          },
+          "byteSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 16777216
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
