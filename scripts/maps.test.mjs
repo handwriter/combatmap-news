@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 import { readFile } from 'node:fs/promises';
 import { buildMaps, contentHash, normalizeMapEntry, resolveMapFile, validateMapText } from './maps.mjs';
+import { canonical, hash, resolveDefinition } from './balance.mjs';
 
 const map = () => ({ id: 'Game map', name: 'Game map', maxPlayers: 2, maxUnitsPerPlayer: 80,
   cameraBounds: { cx: 0, cy: 0, sx: 20, sy: 13 }, terrain: { gridWidth: 2, gridHeight: 2, cells: [1, 2, 3, 4], trees: [] }, players: [{}, {}], bridges: [] });
@@ -79,6 +80,22 @@ test('failed publication preserves the last complete output', async t => {
   const root = await fixture(t);
   for (const folder of ['scripts', 'admin', 'site'])
     await cp(new URL(`../${folder}/`, import.meta.url), path.join(root, folder), { recursive: true });
+  // The full publisher needs a valid balance revision, independent of the live promotion.
+  const balanceDir = path.join(root, 'content/balance');
+  await mkdir(balanceDir, { recursive: true });
+  const baseline = await readFile(new URL('../content/balance/prod-bootstrap.json', import.meta.url), 'utf8');
+  const catalog = JSON.parse(await readFile(path.join(root, 'schema/balance-catalog.json'), 'utf8'));
+  await writeFile(path.join(balanceDir, 'test.json'), baseline);
+  await writeFile(path.join(balanceDir, 'prod-bootstrap.json'), baseline);
+  await writeFile(path.join(balanceDir, 'promotion.json'), JSON.stringify({
+    sourceCommit: '', expectedHash: hash(canonical(resolveDefinition(JSON.parse(baseline), catalog).snapshot)),
+    comment: 'Publication fixture',
+  }));
+  for (const args of [['init', '--quiet'], ['add', 'content/balance', 'schema/balance-catalog.json'], ['commit', '--quiet', '-m', 'Balance fixture']]) {
+    const result = spawnSync('git', ['-c', 'user.name=Publication fixture', '-c', 'user.email=fixture@example.invalid',
+      '-c', 'commit.gpgsign=false', ...args], { cwd: root, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+  }
   await writeFile(path.join(root, 'package.json'), '{"type":"module"}');
   await symlink(fileURLToPath(new URL('../node_modules/', import.meta.url)), path.join(root, 'node_modules'), 'dir');
   await entry(root, 'map');
