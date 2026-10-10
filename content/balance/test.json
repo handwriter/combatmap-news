@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "unitDefaults": {
-    "UnitData_Cost": 15,
+    "UnitData_Cost": 16,
     "UnitData_ExcludeFromProduction": false,
     "UnitHealth__maxHealth": 132,
     "UnitHealth__regenStandardPerSecond": 7.8,
@@ -255,6 +255,9 @@
       "TerritoryConfig_EncirclementEscapeRadius": 8,
       "TerritoryConfig_NeutralEnclaveMaxCells": 256,
       "TerritoryConfig_MinTerritorySize": 4,
+      "TerritoryConfig_BorderSmoothRadius": 3,
+      "TerritoryConfig__borderThreshold": 0.05,
+      "TerritoryConfig_EncirclementClosedLoopThreshold": 1.5,
       "TerritoryConfig_EnclaveEnemyShare": 0.75,
       "TerritoryConfig_HoleFillThreshold": 7,
       "TerritoryConfig_ErosionEnabled": true,
@@ -262,10 +265,7 @@
       "TerritoryConfig_NeutralEnclaveDecayEnabled": true,
       "TerritoryConfig_FillHoles": true,
       "TerritoryConfig_RemoveSmallIslands": true,
-      "TerritoryConfig_UpdateInterval": 0.33,
-      "TerritoryConfig_BorderSmoothRadius": 3,
-      "TerritoryConfig__borderThreshold": 0.05,
-      "TerritoryConfig_EncirclementClosedLoopThreshold": 1.5
+      "TerritoryConfig_UpdateInterval": 0.33
     },
     "naval": {
       "NavalConfig_LoadRadiusPadding": 0.25,
@@ -382,6 +382,7 @@
       "AiTuning_MaxQueuePerCity": 3,
       "AiTuning_MinLiveUnitsForTech": 2,
       "AiTuning_RushUnitThreshold": 2,
+      "AiTuning_SingleCityStallSeconds": 300,
       "AiTuning_EngageHysteresis": 1.5,
       "AiTuning_EngageRangeFactor": 0.95,
       "AiTuning_DisengageRangeFactor": 1.15,
@@ -411,8 +412,7 @@
       "AiTuning_AlarmCityFactor": 2.5,
       "AiTuning_AlarmMapFraction": 0.15,
       "AiTuning_InfiltrationMapFraction": 0.15,
-      "AiTuning_ArrivalClusterFraction": 0.25,
-      "AiTuning_SingleCityStallSeconds": 300
+      "AiTuning_ArrivalClusterFraction": 0.25
     }
   }
 }
