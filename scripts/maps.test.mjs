@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { mkdtemp, mkdir, writeFile, cp, rm, symlink } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, cp, rm, symlink, realpath } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 import { readFile } from 'node:fs/promises';
 import { buildMaps, contentHash, normalizeMapEntry, resolveMapFile, validateMapText } from './maps.mjs';
@@ -12,7 +14,7 @@ const map = () => ({ id: 'Game map', name: 'Game map', maxPlayers: 2, maxUnitsPe
 const validate = new Ajv({ allErrors: true }).compile(JSON.parse(await readFile(new URL('../schema/map.schema.json', import.meta.url))));
 
 async function fixture(t) {
-  const root = await mkdtemp(path.join(tmpdir(), 'combatmap-catalog-'));
+  const root = await realpath(await mkdtemp(path.join(tmpdir(), 'combatmap-catalog-')));
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(path.join(root, 'content/maps'), { recursive: true });
   await mkdir(path.join(root, 'content/map-files'), { recursive: true });
@@ -71,4 +73,27 @@ test('path traversal and escaping symlinks are rejected', async t => {
   await assert.rejects(resolveMapFile(root, '/map-files/../outside.json'));
   await symlink('../outside.json', path.join(root, 'content/map-files/link.json'));
   await assert.rejects(resolveMapFile(root, '/map-files/link.json'));
+});
+
+test('failed publication preserves the last complete output', async t => {
+  const root = await fixture(t);
+  for (const folder of ['scripts', 'admin', 'site'])
+    await cp(new URL(`../${folder}/`, import.meta.url), path.join(root, folder), { recursive: true });
+  await writeFile(path.join(root, 'package.json'), '{"type":"module"}');
+  await symlink(fileURLToPath(new URL('../node_modules/', import.meta.url)), path.join(root, 'node_modules'), 'dir');
+  await entry(root, 'map');
+  await writeFile(path.join(root, 'content/map-files/payload.json'), JSON.stringify(map()));
+  const publish = () => spawnSync(process.execPath, [path.join(root, 'scripts/build.mjs')], { encoding: 'utf8' });
+  const first = publish();
+  assert.equal(first.status, 0, first.stderr);
+  const feedPath = path.join(root, 'dist/v1/maps.json');
+  const previous = await readFile(feedPath, 'utf8');
+  const payloadPath = path.join(root, 'dist/v1', JSON.parse(previous).items[0].url);
+  const previousPayload = await readFile(payloadPath, 'utf8');
+  await writeFile(path.join(root, 'content/map-files/payload.json'), '{broken');
+  const failed = publish();
+  assert.equal(failed.status, 1);
+  assert.match(failed.stderr, /Content build failed/);
+  assert.equal(await readFile(feedPath, 'utf8'), previous);
+  assert.equal(await readFile(payloadPath, 'utf8'), previousPayload);
 });

@@ -8,6 +8,7 @@
   </head>
   <body>
     <!-- Sveltia CMS reads ./config.yml. Sign in with a GitHub fine-grained token (see README). -->
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+    <script>window.CMS_MANUAL_INIT = true;</script>
+    <script src="./balance-cms.js" type="module"></script>
   </body>
 </html>

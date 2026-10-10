@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "channel", "sourceCommit", "hash", "byteSize", "url"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "channel": { "enum": ["prod", "test"] },
+    "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "byteSize": { "type": "integer", "minimum": 1, "maximum": 524288 },
+    "url": { "type": "string", "pattern": "^snapshots/[a-f0-9]{64}\\.json$" }
+  }
+}

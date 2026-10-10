@@ -12,6 +12,7 @@ import Ajv from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import sharp from 'sharp';
 import { buildMaps } from './maps.mjs';
+import { buildBalance } from './balance.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -176,6 +177,9 @@ async function main() {
   const now = new Date();
   const maps = await buildMaps(ROOT, now);
   problems.push(...maps.problems);
+  let balance;
+  try { balance = await buildBalance(ROOT); }
+  catch (err) { problems.push(`balance: ${err.message}`); }
 
   // Images: CMS stores "/media/<file>" (public_folder) for files in content/media (media_folder).
   const images = new Map();
@@ -212,11 +216,24 @@ async function main() {
     console.error('maps.json does not match the catalog schema:', validateMaps.errors);
     process.exit(1);
   }
+  const validateBalance = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/balance-snapshot.schema.json'), 'utf8')));
+  const validateDefinition = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/balance-definition.schema.json'), 'utf8')));
+  const validateManifest = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/balance-manifest.schema.json'), 'utf8')));
+  for (const channel of ['test', 'prod']) {
+    if (!validateDefinition(balance.preview[channel].definition) || !validateBalance(balance.preview[channel].snapshot) || !validateManifest(balance[`${channel}Manifest`])) {
+      throw new Error(`Invalid ${channel} balance: ${JSON.stringify(validateDefinition.errors || validateBalance.errors || validateManifest.errors)}`);
+    }
+  }
   // Nothing replaces the previous output until BOTH feeds and every enabled map are valid.
   const dist = path.join(ROOT, 'dist');
   await rm(dist, { recursive: true, force: true });
   await mkdir(path.join(dist, 'v1/img'), { recursive: true });
   await mkdir(path.join(dist, 'v1/maps'), { recursive: true });
+  await mkdir(path.join(dist, 'v1/balance/snapshots'), { recursive: true });
+  for (const [hash, text] of balance.payloads) await writeFile(path.join(dist, 'v1/balance/snapshots', `${hash}.json`), text);
+  for (const channel of ['test', 'prod']) await writeFile(path.join(dist, 'v1/balance', `${channel}.json`), JSON.stringify(balance[`${channel}Manifest`], null, 2) + '\n');
+  await writeFile(path.join(dist, 'v1/balance/preview.json'), JSON.stringify(balance.preview) + '\n');
+  await writeFile(path.join(dist, 'v1/balance/revisions.json'), JSON.stringify(balance.revisions) + '\n');
   for (const [hash, buffer] of rendered) await writeFile(path.join(dist, 'v1/img', `${hash}.jpg`), buffer);
   for (const [hash, text] of maps.payloads) await writeFile(path.join(dist, 'v1/maps', `${hash}.json`), text);
   await writeFile(path.join(dist, 'v1/maps.json'), `${JSON.stringify(maps.feed, null, 2)}\n`);

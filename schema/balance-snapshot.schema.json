@@ -1,0 +1,4540 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "units",
+    "cities",
+    "globals"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_unit",
+        "engineer_unit",
+        "tank_unit",
+        "cavalry_unit",
+        "machinegun_unit",
+        "artillery_unit",
+        "barge_unit"
+      ],
+      "properties": {
+        "base_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "engineer_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "tank_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "cavalry_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "machinegun_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "artillery_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "barge_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitData_Cost",
+            "UnitData_ExcludeFromProduction",
+            "UnitHealth__maxHealth",
+            "UnitHealth__regenStandardPerSecond",
+            "UnitHealth__regenAfterCombatPerSecond",
+            "UnitHealth__calmAfterCombatSettings",
+            "UnitMorale__maxMorale",
+            "UnitMorale__drainMeleePerSecond",
+            "UnitMorale__regenStandardPerSecond",
+            "UnitMorale__regenAfterCombatPerSecond",
+            "UnitMorale__calmAfterCombatSeconds",
+            "SimpleMovable__speed",
+            "SimpleMovable__domain",
+            "SimpleMovable__stopDistance",
+            "SimpleMovable__safeDistance",
+            "SimpleMovable__weight",
+            "SimpleMovable__immovable",
+            "SimpleMovable__retreatSpeedMultiplier",
+            "SimpleMovable__pushForce",
+            "SimpleMovable__pushCoefficient",
+            "SimpleMovable__greenSectorHalfAngle",
+            "SimpleMovable__blockedSectorHalfAngle",
+            "MeleeAttacker__damage",
+            "MeleeAttacker__attackCooldown",
+            "RangedAttacker__isRangedCombat",
+            "RangedAttacker__autoFireEnabled",
+            "RangedAttacker__prSize",
+            "RangedAttacker__prDamage",
+            "RangedAttacker__prSpeed",
+            "RangedAttacker__prFlightType",
+            "RangedAttacker__isPrExplodes",
+            "RangedAttacker__explosionArea",
+            "RangedAttacker__prLifetime",
+            "RangedAttacker__firingRange",
+            "RangedAttacker__aimTime_x",
+            "RangedAttacker__aimTime_y",
+            "RangedAttacker__cooldownTime_x",
+            "RangedAttacker__cooldownTime_y",
+            "RangedAttacker__numberOfShellsPerBurst",
+            "RangedAttacker__timeBetweenShellsQueue",
+            "RangedAttacker__spreadAngle",
+            "UnitDeployment__requiresDeployment",
+            "UnitDeployment__deployTime",
+            "UnitDeployment__undeployTime",
+            "NavalConversion__convertTime",
+            "NavalConversion__isNavalForm",
+            "Unit__influenceProtectedRadius",
+            "Unit__affectsTerritory",
+            "BodyCircle_radius",
+            "DetectionCircle_radius",
+            "EngagementCircle_radius",
+            "UnitHealth__regenTickInterval",
+            "UnitHealth__regenCombatExitDebounceFixedSteps",
+            "UnitMorale__regenTickInterval",
+            "UnitMorale__combatExitDebounceFixedSteps",
+            "SimpleMovable__minPushSpeed",
+            "SimpleMovable__sectorHysteresis",
+            "SimpleMovable__engagementContactSlack",
+            "SimpleMovable_RouteCheckInterval",
+            "SimpleMovable_RouteLookahead",
+            "SimpleMovable_WaypointReachBodyRadii",
+            "SimpleMovable_SkipWaypointBodyRadii",
+            "SimpleMovable_SidestepProbeDistance",
+            "SimpleMovable_LandingZoneBodyRadii",
+            "SimpleMovable_ArrivalStallTimeout",
+            "SimpleMovable_StallProgressBodyFraction",
+            "SimpleMovable_FriendContactSlack",
+            "SimpleMovable_BlockedArrivalBodyRadii",
+            "SimpleMovable_MaxTerrainEscapePerStep",
+            "SimpleMovable_OverlapResolveRate",
+            "SimpleMovable_EngagedExitDebounceFixedSteps"
+          ],
+          "properties": {
+            "UnitData_Cost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "UnitData_ExcludeFromProduction": {
+              "type": "boolean"
+            },
+            "UnitHealth__maxHealth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitHealth__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitHealth__calmAfterCombatSettings": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__maxMorale": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UnitMorale__drainMeleePerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenStandardPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__regenAfterCombatPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitMorale__calmAfterCombatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__speed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__domain": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "SimpleMovable__stopDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__safeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__weight": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable__immovable": {
+              "type": "boolean"
+            },
+            "SimpleMovable__retreatSpeedMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__pushForce": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__pushCoefficient": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "SimpleMovable__greenSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__blockedSectorHalfAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "MeleeAttacker__damage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MeleeAttacker__attackCooldown": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__isRangedCombat": {
+              "type": "boolean"
+            },
+            "RangedAttacker__autoFireEnabled": {
+              "type": "boolean"
+            },
+            "RangedAttacker__prSize": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prSpeed": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "RangedAttacker__prFlightType": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "RangedAttacker__isPrExplodes": {
+              "type": "boolean"
+            },
+            "RangedAttacker__explosionArea": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__prLifetime": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__firingRange": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__aimTime_y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_x": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__cooldownTime_y": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "RangedAttacker__numberOfShellsPerBurst": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "RangedAttacker__timeBetweenShellsQueue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "RangedAttacker__spreadAngle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "UnitDeployment__requiresDeployment": {
+              "type": "boolean"
+            },
+            "UnitDeployment__deployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UnitDeployment__undeployTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__convertTime": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConversion__isNavalForm": {
+              "type": "boolean"
+            },
+            "Unit__influenceProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "Unit__affectsTerritory": {
+              "type": "boolean"
+            },
+            "BodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "DetectionCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "EngagementCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "UnitHealth__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitHealth__regenCombatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "UnitMorale__regenTickInterval": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 60
+            },
+            "UnitMorale__combatExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "SimpleMovable__minPushSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable__sectorHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 180
+            },
+            "SimpleMovable__engagementContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_RouteCheckInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            },
+            "SimpleMovable_RouteLookahead": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "SimpleMovable_WaypointReachBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SkipWaypointBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_SidestepProbeDistance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_LandingZoneBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_ArrivalStallTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_StallProgressBodyFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_FriendContactSlack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_BlockedArrivalBodyRadii": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_MaxTerrainEscapePerStep": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "SimpleMovable_OverlapResolveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "SimpleMovable_EngagedExitDebounceFixedSteps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        }
+      }
+    },
+    "cities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "city",
+        "city_capital"
+      ],
+      "properties": {
+        "city": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "CaptureCircle_radius",
+            "CityBodyCircle_radius"
+          ],
+          "properties": {
+            "CaptureCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "CityBodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            }
+          }
+        },
+        "city_capital": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "CaptureCircle_radius",
+            "CityBodyCircle_radius"
+          ],
+          "properties": {
+            "CaptureCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            },
+            "CityBodyCircle_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1000
+            }
+          }
+        }
+      }
+    },
+    "globals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "match",
+        "cities",
+        "morale",
+        "ranged",
+        "terrain",
+        "territory",
+        "naval",
+        "research",
+        "ai"
+      ],
+      "properties": {
+        "match": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "GameConfig_MatchStartCountdown"
+          ],
+          "properties": {
+            "GameConfig_MatchStartCountdown": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            }
+          }
+        },
+        "cities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "MapsConfig_CitySettings_InfluenceRadius",
+            "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier",
+            "MapsConfig_CitySettings_BuffSettings_RegenMultiplier",
+            "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed",
+            "MapsConfig_CitySettings_ProductionSettings_SwitchingPenaltySeconds",
+            "MapsConfig_CitySettings_ProductionSettings_CapturePenaltySeconds",
+            "MapsConfig_CitySettings_ProductionSettings_DefaultStandardUnitId"
+          ],
+          "properties": {
+            "MapsConfig_CitySettings_InfluenceRadius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "MapsConfig_CitySettings_BuffSettings_RegenMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MapsConfig_CitySettings_ProductionSettings_SwitchingPenaltySeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MapsConfig_CitySettings_ProductionSettings_CapturePenaltySeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MapsConfig_CitySettings_ProductionSettings_DefaultStandardUnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            }
+          }
+        },
+        "morale": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "MoraleConfig_MoraleMultiplierFloor",
+            "MoraleConfig_MoraleAttackMultiplier",
+            "MoraleConfig_MoraleEncirclementMultiplier",
+            "MoraleConfig_MoraleDamageBullet",
+            "MoraleConfig_MoraleDamageExplosion"
+          ],
+          "properties": {
+            "MoraleConfig_MoraleMultiplierFloor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "MoraleConfig_MoraleAttackMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MoraleConfig_MoraleEncirclementMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MoraleConfig_MoraleDamageBullet": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "MoraleConfig_MoraleDamageExplosion": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            }
+          }
+        },
+        "ranged": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "RangedCombatConfig_RegenSuppressionAfterHit"
+          ],
+          "properties": {
+            "RangedCombatConfig_RegenSuppressionAfterHit": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            }
+          }
+        },
+        "terrain": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "TerrainEffectsConfig_Entries",
+            "TerrainEffectsConfig_ForestEffect",
+            "TerrainEffectsConfig_ForestTreeThreshold",
+            "TerrainEffectsConfig_PathfindingDpsWeight",
+            "TerrainEffectsConfig_PathfindingWaterCost",
+            "TerrainEffectsConfig_PathfindingEdgeComfort",
+            "TerrainEffectsConfig_PathfindingEdgePenalty",
+            "TerrainEffectsConfig_PathfindingLandingWalkCost",
+            "TerrainEffectsConfig_MountainEdgeClearance",
+            "TerrainEffectsConfig_NoSidestepIntoWater"
+          ],
+          "properties": {
+            "TerrainEffectsConfig_Entries": {
+              "type": "array",
+              "maxItems": 64,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "Type",
+                  "AffectedUnitIds",
+                  "ExcludedUnitIds",
+                  "MovementSpeedMultiplier",
+                  "OutgoingDamageMultiplier",
+                  "IncomingDamageMultiplier",
+                  "RegenMultiplier",
+                  "DamageOverTimePerSecond"
+                ],
+                "properties": {
+                  "Type": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 7
+                  },
+                  "AffectedUnitIds": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "base_unit",
+                        "engineer_unit",
+                        "tank_unit",
+                        "cavalry_unit",
+                        "machinegun_unit",
+                        "artillery_unit",
+                        "barge_unit"
+                      ]
+                    }
+                  },
+                  "ExcludedUnitIds": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "base_unit",
+                        "engineer_unit",
+                        "tank_unit",
+                        "cavalry_unit",
+                        "machinegun_unit",
+                        "artillery_unit",
+                        "barge_unit"
+                      ]
+                    }
+                  },
+                  "MovementSpeedMultiplier": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "OutgoingDamageMultiplier": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "IncomingDamageMultiplier": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "RegenMultiplier": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "DamageOverTimePerSecond": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100000
+                  }
+                }
+              }
+            },
+            "TerrainEffectsConfig_ForestEffect": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "Type",
+                "AffectedUnitIds",
+                "ExcludedUnitIds",
+                "MovementSpeedMultiplier",
+                "OutgoingDamageMultiplier",
+                "IncomingDamageMultiplier",
+                "RegenMultiplier",
+                "DamageOverTimePerSecond"
+              ],
+              "properties": {
+                "Type": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 7
+                },
+                "AffectedUnitIds": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "base_unit",
+                      "engineer_unit",
+                      "tank_unit",
+                      "cavalry_unit",
+                      "machinegun_unit",
+                      "artillery_unit",
+                      "barge_unit"
+                    ]
+                  }
+                },
+                "ExcludedUnitIds": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "base_unit",
+                      "engineer_unit",
+                      "tank_unit",
+                      "cavalry_unit",
+                      "machinegun_unit",
+                      "artillery_unit",
+                      "barge_unit"
+                    ]
+                  }
+                },
+                "MovementSpeedMultiplier": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "OutgoingDamageMultiplier": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "IncomingDamageMultiplier": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "RegenMultiplier": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "DamageOverTimePerSecond": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100000
+                }
+              }
+            },
+            "TerrainEffectsConfig_ForestTreeThreshold": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_PathfindingDpsWeight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_PathfindingWaterCost": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_PathfindingEdgeComfort": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_PathfindingEdgePenalty": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_PathfindingLandingWalkCost": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_MountainEdgeClearance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerrainEffectsConfig_NoSidestepIntoWater": {
+              "type": "boolean"
+            }
+          }
+        },
+        "territory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "TerritoryConfig_UnitInfluenceRadius",
+            "TerritoryConfig_CityInfluenceRadius",
+            "TerritoryConfig_UnitProtectedRadius",
+            "TerritoryConfig_CityProtectedRadius",
+            "TerritoryConfig_EncirclementDrainPerSecond",
+            "TerritoryConfig_ErosionRadius",
+            "TerritoryConfig_ErosionSpeed",
+            "TerritoryConfig_EnclaveDecaySpeed",
+            "TerritoryConfig_EncirclementMinOwnedCells",
+            "TerritoryConfig_EncirclementMinIslandSize",
+            "TerritoryConfig_EncirclementEscapeRadius",
+            "TerritoryConfig_NeutralEnclaveMaxCells",
+            "TerritoryConfig_MinTerritorySize",
+            "TerritoryConfig_BorderSmoothRadius",
+            "TerritoryConfig__borderThreshold",
+            "TerritoryConfig_EncirclementClosedLoopThreshold",
+            "TerritoryConfig_EnclaveEnemyShare",
+            "TerritoryConfig_HoleFillThreshold",
+            "TerritoryConfig_ErosionEnabled",
+            "TerritoryConfig_EnclaveDecayEnabled",
+            "TerritoryConfig_NeutralEnclaveDecayEnabled",
+            "TerritoryConfig_FillHoles",
+            "TerritoryConfig_RemoveSmallIslands",
+            "TerritoryConfig_UpdateInterval"
+          ],
+          "properties": {
+            "TerritoryConfig_UnitInfluenceRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_CityInfluenceRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_UnitProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_CityProtectedRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_EncirclementDrainPerSecond": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_ErosionRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_ErosionSpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_EnclaveDecaySpeed": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_EncirclementMinOwnedCells": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 196608
+            },
+            "TerritoryConfig_EncirclementMinIslandSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 196608
+            },
+            "TerritoryConfig_EncirclementEscapeRadius": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 196608
+            },
+            "TerritoryConfig_NeutralEnclaveMaxCells": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 196608
+            },
+            "TerritoryConfig_MinTerritorySize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 196608
+            },
+            "TerritoryConfig_BorderSmoothRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "TerritoryConfig__borderThreshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "TerritoryConfig_EncirclementClosedLoopThreshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "TerritoryConfig_EnclaveEnemyShare": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "TerritoryConfig_HoleFillThreshold": {
+              "type": "integer",
+              "minimum": 5,
+              "maximum": 8
+            },
+            "TerritoryConfig_ErosionEnabled": {
+              "type": "boolean"
+            },
+            "TerritoryConfig_EnclaveDecayEnabled": {
+              "type": "boolean"
+            },
+            "TerritoryConfig_NeutralEnclaveDecayEnabled": {
+              "type": "boolean"
+            },
+            "TerritoryConfig_FillHoles": {
+              "type": "boolean"
+            },
+            "TerritoryConfig_RemoveSmallIslands": {
+              "type": "boolean"
+            },
+            "TerritoryConfig_UpdateInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 60
+            }
+          }
+        },
+        "naval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "NavalConfig_LoadRadiusPadding",
+            "NavalConfig_MaxWaterSearchRadius",
+            "NavalConfig_ShoreOverlap",
+            "NavalConfig_LandingPressSeconds",
+            "NavalConfig_LandingPressAngleDegrees"
+          ],
+          "properties": {
+            "NavalConfig_LoadRadiusPadding": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConfig_MaxWaterSearchRadius": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConfig_ShoreOverlap": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConfig_LandingPressSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "NavalConfig_LandingPressAngleDegrees": {
+              "type": "number",
+              "minimum": 5,
+              "maximum": 89
+            }
+          }
+        },
+        "research": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "TechTreeConfig_KillProgressCapFraction",
+            "TechTreeConfig_KillRewardPerUnitCost",
+            "tech_infantry_Cost",
+            "tech_infantry_Prereqs",
+            "tech_infantry_Effect",
+            "tech_infantry_UnitId",
+            "tech_infantry_Value",
+            "tech_infantry_Era",
+            "tech_cavalry_Cost",
+            "tech_cavalry_Prereqs",
+            "tech_cavalry_Effect",
+            "tech_cavalry_UnitId",
+            "tech_cavalry_Value",
+            "tech_cavalry_Era",
+            "tech_engineers_Cost",
+            "tech_engineers_Prereqs",
+            "tech_engineers_Effect",
+            "tech_engineers_UnitId",
+            "tech_engineers_Value",
+            "tech_engineers_Era",
+            "tech_machinegun_Cost",
+            "tech_machinegun_Prereqs",
+            "tech_machinegun_Effect",
+            "tech_machinegun_UnitId",
+            "tech_machinegun_Value",
+            "tech_machinegun_Era",
+            "tech_artillery_Cost",
+            "tech_artillery_Prereqs",
+            "tech_artillery_Effect",
+            "tech_artillery_UnitId",
+            "tech_artillery_Value",
+            "tech_artillery_Era",
+            "tech_troop_limit_Cost",
+            "tech_troop_limit_Prereqs",
+            "tech_troop_limit_Effect",
+            "tech_troop_limit_UnitId",
+            "tech_troop_limit_Value",
+            "tech_troop_limit_Era",
+            "tech_tank_Cost",
+            "tech_tank_Prereqs",
+            "tech_tank_Effect",
+            "tech_tank_UnitId",
+            "tech_tank_Value",
+            "tech_tank_Era",
+            "tech_troop_limit_1_Cost",
+            "tech_troop_limit_1_Prereqs",
+            "tech_troop_limit_1_Effect",
+            "tech_troop_limit_1_UnitId",
+            "tech_troop_limit_1_Value",
+            "tech_troop_limit_1_Era",
+            "tech_troop_limit_2_Cost",
+            "tech_troop_limit_2_Prereqs",
+            "tech_troop_limit_2_Effect",
+            "tech_troop_limit_2_UnitId",
+            "tech_troop_limit_2_Value",
+            "tech_troop_limit_2_Era",
+            "tech_naval_affairs_Cost",
+            "tech_naval_affairs_Prereqs",
+            "tech_naval_affairs_Effect",
+            "tech_naval_affairs_UnitId",
+            "tech_naval_affairs_Value",
+            "tech_naval_affairs_Era"
+          ],
+          "properties": {
+            "TechTreeConfig_KillProgressCapFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "TechTreeConfig_KillRewardPerUnitCost": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_infantry_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_infantry_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_infantry_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_infantry_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_infantry_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_infantry_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_cavalry_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_cavalry_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_cavalry_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_cavalry_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_cavalry_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_cavalry_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_engineers_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_engineers_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_engineers_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_engineers_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_engineers_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_engineers_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_machinegun_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_machinegun_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_machinegun_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_machinegun_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_machinegun_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_machinegun_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_artillery_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_artillery_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_artillery_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_artillery_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_artillery_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_artillery_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_troop_limit_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_troop_limit_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_troop_limit_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_troop_limit_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_troop_limit_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_troop_limit_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_tank_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_tank_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_tank_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_tank_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_tank_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_tank_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_troop_limit_1_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_troop_limit_1_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_troop_limit_1_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_troop_limit_1_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_troop_limit_1_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_troop_limit_1_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_troop_limit_2_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_troop_limit_2_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_troop_limit_2_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_troop_limit_2_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_troop_limit_2_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_troop_limit_2_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "tech_naval_affairs_Cost": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_naval_affairs_Prereqs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "infantry",
+                  "cavalry",
+                  "engineers",
+                  "machinegun",
+                  "artillery",
+                  "troop_limit",
+                  "tank",
+                  "troop_limit_1",
+                  "troop_limit_2",
+                  "naval_affairs"
+                ]
+              }
+            },
+            "tech_naval_affairs_Effect": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "tech_naval_affairs_UnitId": {
+              "type": "string",
+              "enum": [
+                "",
+                "base_unit",
+                "engineer_unit",
+                "tank_unit",
+                "cavalry_unit",
+                "machinegun_unit",
+                "artillery_unit",
+                "barge_unit"
+              ]
+            },
+            "tech_naval_affairs_Value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "tech_naval_affairs_Era": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            }
+          }
+        },
+        "ai": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "AiTuning_PushRatio",
+            "AiTuning_AlarmPushRatioMultiplier",
+            "AiTuning_GarrisonFraction",
+            "AiTuning_AssaultPowerMargin",
+            "AiTuning_RetreatHpFraction",
+            "AiTuning_ArtilleryStandoffFactor",
+            "AiTuning_EnemyOutnumberedRatio",
+            "AiTuning_CapitalValue",
+            "AiTuning_LostCapitalValue",
+            "AiTuning_CityValue",
+            "AiTuning_NeutralBonus",
+            "AiTuning_DistanceWeight",
+            "AiTuning_ThreatWeight",
+            "AiTuning_WeightInfantry",
+            "AiTuning_WeightTank",
+            "AiTuning_WeightCavalry",
+            "AiTuning_WeightMachineGun",
+            "AiTuning_MinReissueInterval",
+            "AiTuning_SameDestEpsilon",
+            "AiTuning_WaterCostThreshold",
+            "AiTuning_UnreachableTolerance",
+            "AiTuning_MaxQueuePerCity",
+            "AiTuning_MinLiveUnitsForTech",
+            "AiTuning_RushUnitThreshold",
+            "AiTuning_SingleCityStallSeconds",
+            "AiTuning_EngageHysteresis",
+            "AiTuning_EngageRangeFactor",
+            "AiTuning_DisengageRangeFactor",
+            "AiTuning_AssaultTimeout",
+            "AiTuning_PushCooldown",
+            "AiTuning_BreakthroughEvery",
+            "AiTuning_AlarmResponders",
+            "AiTuning_StalemateSeconds",
+            "AiTuning_MaxFrontHalfWidth",
+            "AiTuning_GarrisonHoldSeconds",
+            "AiTuning_MaxSimultaneousAssaults",
+            "AiTuning_CommittedTargetBonus",
+            "AiTuning_CapitalGuardMinUnits",
+            "AiTuning_RecoveredHpFraction",
+            "AiTuning_RetreatSeconds",
+            "AiTuning_MinAssaultPower",
+            "AiTuning_StagingBackoff",
+            "AiTuning_DepthWeight",
+            "AiTuning_CrowdingPenalty",
+            "AiTuning_EconomyInterval",
+            "AiTuning_ResearchInterval",
+            "AiTuning_StrategyInterval",
+            "AiTuning_CombatInterval",
+            "AiTuning_ContactRangeFactor",
+            "AiTuning_ContactMapFraction",
+            "AiTuning_ClusterFactor",
+            "AiTuning_AlarmCityFactor",
+            "AiTuning_AlarmMapFraction",
+            "AiTuning_InfiltrationMapFraction",
+            "AiTuning_ArrivalClusterFraction"
+          ],
+          "properties": {
+            "AiTuning_PushRatio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_AlarmPushRatioMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_GarrisonFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "AiTuning_AssaultPowerMargin": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_RetreatHpFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "AiTuning_ArtilleryStandoffFactor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_EnemyOutnumberedRatio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_CapitalValue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_LostCapitalValue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_CityValue": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_NeutralBonus": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_DistanceWeight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_ThreatWeight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_WeightInfantry": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_WeightTank": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_WeightCavalry": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_WeightMachineGun": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_MinReissueInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100000
+            },
+            "AiTuning_SameDestEpsilon": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_WaterCostThreshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_UnreachableTolerance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_MaxQueuePerCity": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_MinLiveUnitsForTech": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_RushUnitThreshold": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_SingleCityStallSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_EngageHysteresis": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_EngageRangeFactor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_DisengageRangeFactor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_AssaultTimeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_PushCooldown": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_BreakthroughEvery": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_AlarmResponders": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_StalemateSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_MaxFrontHalfWidth": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_GarrisonHoldSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_MaxSimultaneousAssaults": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_CommittedTargetBonus": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_CapitalGuardMinUnits": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "AiTuning_RecoveredHpFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "AiTuning_RetreatSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_MinAssaultPower": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_StagingBackoff": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_DepthWeight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_CrowdingPenalty": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "AiTuning_EconomyInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100000
+            },
+            "AiTuning_ResearchInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100000
+            },
+            "AiTuning_StrategyInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100000
+            },
+            "AiTuning_CombatInterval": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 100000
+            },
+            "AiTuning_ContactRangeFactor": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "AiTuning_ContactMapFraction": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1
+            },
+            "AiTuning_ClusterFactor": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "AiTuning_AlarmCityFactor": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 100000
+            },
+            "AiTuning_AlarmMapFraction": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1
+            },
+            "AiTuning_InfiltrationMapFraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "AiTuning_ArrivalClusterFraction": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}
