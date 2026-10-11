@@ -42,6 +42,12 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: balance-publication
+          path: |
+            dist/v1/balance/publication.json
+            dist/v1/balance/production-history.json
 
   deploy:
     needs: build
@@ -52,3 +58,24 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  record-balance-publication:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/download-artifact@v4
+        with:
+          name: balance-publication
+          path: .balance-publication
+      - run: node scripts/record-balance-publication.mjs .balance-publication
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

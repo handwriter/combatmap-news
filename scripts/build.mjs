@@ -234,6 +234,11 @@ async function main() {
   for (const channel of ['test', 'prod']) await writeFile(path.join(dist, 'v1/balance', `${channel}.json`), JSON.stringify(balance[`${channel}Manifest`], null, 2) + '\n');
   await writeFile(path.join(dist, 'v1/balance/preview.json'), JSON.stringify(balance.preview) + '\n');
   await writeFile(path.join(dist, 'v1/balance/revisions.json'), JSON.stringify(balance.revisions) + '\n');
+  await mkdir(path.join(dist, 'v1/balance/history'), { recursive: true });
+  for (const [url, text] of balance.historyData) await writeFile(path.join(dist, 'v1/balance', url), text);
+  await writeFile(path.join(dist, 'v1/balance/test-history.json'), JSON.stringify(balance.testHistory) + '\n');
+  await writeFile(path.join(dist, 'v1/balance/production-history.json'), JSON.stringify(balance.productionHistory) + '\n');
+  await writeFile(path.join(dist, 'v1/balance/publication.json'), JSON.stringify(balance.publication) + '\n');
   for (const [hash, buffer] of rendered) await writeFile(path.join(dist, 'v1/img', `${hash}.jpg`), buffer);
   for (const [hash, text] of maps.payloads) await writeFile(path.join(dist, 'v1/maps', `${hash}.json`), text);
   await writeFile(path.join(dist, 'v1/maps.json'), `${JSON.stringify(maps.feed, null, 2)}\n`);

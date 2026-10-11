@@ -55,19 +55,10 @@ async function load() {
   $('status').textContent = 'Загрузка…'; $('status').className = '';
   try {
     const fetchJson = async url => { const r = await fetch(url, { cache: 'no-store' }); if (!r.ok) throw Error(`HTTP ${r.status}`); return r.json(); };
-    const [preview, revisions] = await Promise.all([fetchJson('v1/balance/preview.json'), fetchJson('v1/balance/revisions.json')]);
-    data = preview; $('promotion').hidden = false; $('revision').replaceChildren();
-    for (const r of revisions) {
-      const option = document.createElement('option'); option.textContent = `${r.sourceCommit.slice(0, 8)} · ${r.comment}`; option.value = JSON.stringify(r); $('revision').append(option);
-    }
-    selectRevision(); $('prod-version').textContent = `Prod сейчас: ${data.prod.manifest.sourceCommit} · ${data.promotion.comment}`; render();
+    data = await fetchJson('v1/balance/preview.json'); $('promotion').hidden = false;
+    $('test-version').textContent = `Последняя test: ${data.test.manifest.sourceCommit.slice(0, 8)}`;
+    $('prod-version').textContent = `Продакшн сейчас: ${data.prod.manifest.sourceCommit.slice(0, 8)} · ${data.promotion.comment}`; render();
   } catch (e) { $('status').className = 'error'; $('status').textContent = `Не удалось загрузить баланс: ${e.message}`; }
 }
-function selectRevision() { const r = JSON.parse($('revision').value); $('commit').value = r.sourceCommit; $('hash').value = r.hash; $('copy-status').textContent = ''; }
-async function copy(id) {
-  try { await navigator.clipboard.writeText($(id).value); $('copy-status').textContent = id === 'commit' ? 'Коммит скопирован.' : 'Хэш скопирован.'; }
-  catch { $(id).focus(); $(id).select(); $('copy-status').textContent = 'Выделено для копирования.'; }
-}
-$('copy-commit').onclick = () => copy('commit'); $('copy-hash').onclick = () => copy('hash'); $('revision').onchange = selectRevision;
 $('search').oninput = render; $('diff').onchange = render; $('reload').onclick = load;
 load();

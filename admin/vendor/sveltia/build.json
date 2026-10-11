@@ -1,0 +1,10 @@
+{
+  "version": "0.233.1",
+  "sourceCommit": "61d1f407d93d2c786d493c1a53a2a8c9fb7aa663",
+  "patchSha256": "c0d07185b1b70a000db9e333eb05b8c07c1056b6da43e69eb4943802ad3222a0",
+  "files": {
+    "chunks/react-dom.js": "67e10cac370927e29fa87b6a558732b8d04e9c2d0c34382a8af1e0483c03db4c",
+    "LICENSE.txt": "dcbe3c626d85741f6fabefed0b34d07a2e92c032f63aa21c0279062363859c32",
+    "sveltia-cms.mjs": "fb615a69ba7c221fdcb3613d8c3ddc833804e754d6b1df681aafdc5c3d1f4dc7"
+  }
+}

@@ -79,6 +79,10 @@
 
 ## Устройство
 
+Баланс, публикация и восстановление ревизий описаны в [BALANCE.md](BALANCE.md).
+Админка использует локальную Sveltia CMS 0.233.1; [патч и рецепт пересборки](scripts/sveltia/README.md)
+хранятся вместе с готовой сборкой в репозитории.
+
 ```
 admin/            редактор: index.html (Sveltia CMS) + config.yml (поля формы)
 content/news/     одна новость = один JSON (Sveltia i18n single_file: { en: {...}, ru: {...} })

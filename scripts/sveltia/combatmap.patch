@@ -1,0 +1,231 @@
+--- a/src/lib/components/contents/details/preview/entry-preview-iframe.svelte
++++ b/src/lib/components/contents/details/preview/entry-preview-iframe.svelte
+@@ -12,6 +12,7 @@
+ 
+   import { assetURLUpdates } from '$lib/services/api/asset-proxy';
+   import { loadReactDom } from '$lib/services/api/react-dom';
++  import { getHistoryTemplate } from '$lib/services/api/entry-history';
+   import {
+     createEntryDraftMountContext,
+     getEntryDraftContext,
+@@ -188,7 +189,12 @@
+     }
+ 
+     const mountComponent = reactComponent ? mountReactComponent : mountPlaceholder;
+-    const blobURL = URL.createObjectURL(new Blob([generateHTML()], { type: 'text/html' }));
++    // Balance forms also run in the desktop in-app browser, which does not navigate
++    // preview frames to blob URLs. Keep other collections on the upstream path.
++    const sourceDocument = !!getHistoryTemplate(entryDraft.current)?.hidePreviewLinks;
++    const blobURL = sourceDocument
++      ? undefined
++      : URL.createObjectURL(new Blob([generateHTML()], { type: 'text/html' }));
+ 
+     /**
+      * Callback function to be called when the iframe has loaded its content. It mounts either the
+@@ -203,12 +209,13 @@
+         reportMountError(error);
+       }
+ 
+-      URL.revokeObjectURL(blobURL);
++      if (blobURL) URL.revokeObjectURL(blobURL);
+       initialized = true;
+     };
+ 
+     iframe.addEventListener('load', listener, { once: true });
+-    iframe.src = blobURL;
++    if (sourceDocument) iframe.srcdoc = generateHTML();
++    else iframe.src = /** @type {string} */ (blobURL);
+   };
+ 
+   // Initialize iframe once
+--- /dev/null
++++ b/src/lib/components/contents/details/sidebar/panels/custom-history-panel.svelte
+@@ -0,0 +1,62 @@
++<script>
++  import { createElement } from 'react';
++  import { onMount } from 'svelte';
++  import { loadImmutable, immutableLoaded } from '$lib/services/api/immutable';
++  import { getReactDom, loadReactDom, reactDomLoaded } from '$lib/services/api/react-dom';
++  import { buildPreviewData, convertEntryToMap } from '$lib/services/api/preview-data';
++  import { getEntryDraftContext } from '$lib/services/contents/draft/state.svelte';
++  import { getValueMapSnapshot } from '$lib/services/contents/draft/value-map.svelte';
++  import { setSubtree } from '$lib/services/contents/entry/subtree';
++  import { isDraftReadonly } from '$lib/services/config/readonly';
++  import { unflattenMap } from '$lib/services/utils/object';
++
++  let { component } = $props();
++  const entryDraft = getEntryDraftContext();
++  let container = $state();
++  let ready = $state(false);
++  let error = $state('');
++  let root;
++
++  onMount(() => {
++    let alive = true;
++    Promise.all([loadImmutable(), loadReactDom()]).then(() => {
++      if (alive) ready = true;
++    }).catch((ex) => { if (alive) error = ex.message; });
++    return () => { alive = false; root?.unmount(); };
++  });
++
++  $effect(() => {
++    const draft = entryDraft.current;
++    if (!draft || !ready || !container || !immutableLoaded.current || !reactDomLoaded.current) return;
++    const locale = (draft.collectionFile ?? draft.collection)._i18n.defaultLocale;
++    const currentValues = getValueMapSnapshot(draft, locale);
++    const { entryMap } = buildPreviewData({ draft: { ...draft, currentValues: { ...draft.currentValues, [locale]: currentValues } }, locale });
++    const assertCurrent = () => {
++      if (entryDraft.current !== draft || isDraftReadonly(draft)) throw new Error('Этот черновик больше недоступен для изменения');
++    };
++    const props = {
++      entry: entryMap,
++      originalEntry: convertEntryToMap({ entry: draft.originalEntry, locale, collectionName: draft.collectionName, associatedAssets: [] }),
++      readonly: isDraftReadonly(draft),
++      getDraftData: () => { assertCurrent(); return structuredClone(unflattenMap(getValueMapSnapshot(draft, locale))); },
++      replaceDraft: (data) => {
++        assertCurrent();
++        if (!data || typeof data !== 'object' || Array.isArray(data)) throw new TypeError('Данные черновика должны быть объектом');
++        // Prepare a detached replacement before touching the live, versioned value map.
++        const replacement = structuredClone(data);
++        const target = draft.currentValues[locale];
++        for (const key of Object.keys(target)) delete target[key];
++        for (const [key, value] of Object.entries(replacement)) {
++          if (value && typeof value === 'object') setSubtree(target, key, value);
++          else target[key] = value;
++        }
++        // originalValues stays intact: unsaved diff, cancel and validation retain their meaning.
++      },
++    };
++    root ??= getReactDom().createRoot(container);
++    root.render(createElement(component, props));
++  });
++</script>
++
++{#if error}<p role="alert">{error}</p>{/if}
++<div bind:this={container}></div>
+--- a/src/lib/components/contents/details/sidebar/panels/history-panel.svelte
++++ b/src/lib/components/contents/details/sidebar/panels/history-panel.svelte
+@@ -4,6 +4,8 @@
+   import { onMount } from 'svelte';
+ 
+   import PanelContainer from '$lib/components/contents/details/sidebar/panels/panel-container.svelte';
++  import CustomHistoryPanel from '$lib/components/contents/details/sidebar/panels/custom-history-panel.svelte';
++  import { getHistoryTemplate } from '$lib/services/api/entry-history';
+   import { backend } from '$lib/services/backends';
+   import { getEntryDraftContext } from '$lib/services/contents/draft/state.svelte';
+   import { fetchEntryHistory } from '$lib/services/contents/entry/history';
+@@ -15,6 +17,7 @@
+    */
+ 
+   const entryDraft = getEntryDraftContext();
++  const customTemplate = $derived(getHistoryTemplate(entryDraft.current));
+ 
+   /** @type {FileCommit[]} */
+   let commits = $state([]);
+@@ -38,12 +41,14 @@
+   };
+ 
+   onMount(() => {
+-    load();
++    if (!customTemplate) load();
+   });
+ </script>
+ 
+ <PanelContainer title={_('entry_sidebar.history.title')}>
+-  {#if loading}
++  {#if customTemplate}
++    <CustomHistoryPanel component={customTemplate.component} />
++  {:else if loading}
+     <div class="empty">{_('loading')}</div>
+   {:else if error}
+     <div class="empty">{_('entry_sidebar.history.fetch_failed')}</div>
+--- /dev/null
++++ b/src/lib/services/api/entry-history.js
+@@ -0,0 +1,16 @@
++import { isReactComponent } from '$lib/services/api/react';
++import { preloadImmutable } from '$lib/services/api/immutable';
++import { preloadReactDom } from '$lib/services/api/react-dom';
++
++// Combat Map extension. Registrations are scoped to collection/file, before CMS.init().
++const templates = new Map();
++export const registerHistoryTemplate = (name, component, { hidePreviewLinks = false } = {}) => {
++  if (typeof name !== 'string' || !name.includes('/') || !isReactComponent(component)) {
++    throw new TypeError('registerHistoryTemplate requires collection/file and a React component');
++  }
++  templates.set(name, { component, hidePreviewLinks });
++  preloadImmutable();
++  preloadReactDom();
++};
++export const getHistoryTemplate = (draft) =>
++  templates.get(`${draft?.collectionName}/${draft?.fileName}`);
+--- a/src/lib/services/api/index.js
++++ b/src/lib/services/api/index.js
+@@ -27,6 +27,7 @@
+ import { isNonEmptyString } from '$lib/services/utils/string';
+ 
+ import { renderRichText } from './rich-text';
++import { registerHistoryTemplate } from './entry-history';
+ // Don’t use `$lib` above, or the function will not be declared in the generated `index.d.ts` file
+ 
+ /**
+@@ -459,6 +460,7 @@
+     registerEditorComponent,
+     registerEventListener,
+     registerFieldType,
++    registerHistoryTemplate,
+     registerPreviewStyle,
+     registerPreviewTemplate,
+     registerWidget: registerFieldType, // alias for backward compatibility with Netlify/Decap CMS
+@@ -506,6 +508,7 @@
+   registerEditorComponent,
+   registerEventListener,
+   registerFieldType,
++  registerHistoryTemplate,
+   registerPreviewStyle,
+   registerPreviewTemplate,
+   registerFieldType as registerWidget, // alias for backward compatibility with Netlify/Decap CMS
+--- a/src/lib/services/contents/editor/preview-templates.js
++++ b/src/lib/services/contents/editor/preview-templates.js
+@@ -215,6 +215,9 @@
+ 
+   return {
+     entry: entryMap,
++    originalEntry: convertEntryToMap({
++      entry: draft.originalEntry, locale, collectionName: draft.collectionName, associatedAssets: [],
++    }),
+     widgetFor,
+     widgetsFor: createWidgetsFor(unflattenMap(valueMap), widgetFor),
+     getAsset,
+--- a/src/lib/services/contents/editor/sidebar.js
++++ b/src/lib/services/contents/editor/sidebar.js
+@@ -1,4 +1,5 @@
+ import { backend } from '$lib/services/backends';
++import { getHistoryTemplate } from '$lib/services/api/entry-history';
+ import { entryEditorSettings } from '$lib/services/contents/editor/settings';
+ import { hasEntrySlug } from '$lib/services/contents/editor/slug';
+ import { getReferencingRelationFields } from '$lib/services/contents/entry/relations';
+@@ -49,7 +50,7 @@
+     {
+       key: 'history',
+       icon: 'history',
+-      disabled: !backend.current?.isGit || isNew,
++      disabled: !getHistoryTemplate(draft) && (!backend.current?.isGit || isNew),
+     },
+     {
+       key: 'backlinks',
+--- a/src/lib/services/deployments/link.js
++++ b/src/lib/services/deployments/link.js
+@@ -1,4 +1,5 @@
+ import { getEntryPreviewURL } from '$lib/services/contents/entry';
++import { getHistoryTemplate } from '$lib/services/api/entry-history';
+ 
+ /**
+  * @import {
+@@ -71,6 +72,7 @@
+   productionSHA: prodSHA,
+   pollTimedOut = false,
+ }) => {
++  if (getHistoryTemplate({ collectionName: collection.name, fileName: collectionFile?.name })?.hidePreviewLinks) return undefined;
+   /**
+    * Compose the full URL for the entry with the given base.
+    * @param {string} [baseURL] Base URL, or `undefined` to use the configured site URL.

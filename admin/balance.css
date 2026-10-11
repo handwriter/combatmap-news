@@ -1,0 +1,36 @@
+.balance-history { padding: 12px; font-family: inherit; }
+.balance-history-list { display: grid; gap: 6px; }
+.balance-history-item, .balance-button { font: inherit; color: inherit; border: 1px solid var(--sui-secondary-border-color, #aaa); border-radius: 6px; background: var(--sui-secondary-background-color, #eee); padding: 9px 12px; cursor: pointer; }
+.balance-history-item { width: 100%; text-align: left; display: grid; gap: 4px; }
+.balance-history-item small { color: var(--sui-secondary-foreground-color, #777); }
+.balance-button:disabled { opacity: .5; cursor: default; }
+.balance-button:focus-visible, .balance-history-item:focus-visible { outline: 2px solid #a98e50; outline-offset: 2px; }
+.balance-dialog { box-sizing: border-box; width: min(1060px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); padding: 0; color: var(--sui-primary-foreground-color, #222); background: var(--sui-primary-background-color, #fff); border: 1px solid var(--sui-secondary-border-color, #aaa); border-radius: 12px; font: inherit; }
+.balance-dialog::backdrop { background: #0008; }
+.balance-dialog-header, .balance-dialog-footer { display: flex; gap: 12px; align-items: center; padding: 16px 20px; }
+.balance-dialog-header { border-bottom: 1px solid var(--sui-secondary-border-color, #aaa); }
+.balance-dialog-header h2 { flex: 1; margin: 0; font-size: 18px; }
+.balance-dialog-body { padding: 8px 20px 20px; max-height: calc(100dvh - 230px); overflow: auto; }
+.balance-dialog-footer { border-top: 1px solid var(--sui-secondary-border-color, #aaa); flex-wrap: wrap; justify-content: flex-end; }
+.balance-diff { font-family: system-ui, sans-serif; font-size: 13px; }
+.balance-diff table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.balance-diff th, .balance-diff td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--sui-secondary-border-color, #bbb); overflow-wrap: anywhere; white-space: pre-wrap; }
+.balance-diff thead th { color: var(--sui-secondary-foreground-color, #777); }
+.balance-diff .balance-diff-group th { padding-top: 20px; background: var(--sui-secondary-background-color, #f3f3f3); }
+.balance-diff .balance-check { width: 28px; }
+.balance-diff input[type=checkbox] { margin: 2px; cursor: pointer; }
+.balance-diff details { margin-top: 10px; font-size: 12px; }
+.balance-diff summary { cursor: pointer; }
+.balance-error { color: #d85d52; overflow-wrap: anywhere; }
+body:has(> .balance-preview) { margin: 0; }
+.balance-preview { padding: 18px; min-height: 100vh; box-sizing: border-box; color: #252525; background: #fafafa; font-family: system-ui, sans-serif; }
+.balance-preview h2 { margin: 0 0 16px; font: 600 18px system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) {
+  .balance-preview { color: #eee; background: #252525; --sui-secondary-background-color: #333; --sui-secondary-border-color: #555; --sui-secondary-foreground-color: #bbb; }
+}
+@media (max-width: 600px) {
+  .balance-dialog { width: calc(100vw - 16px); }
+  .balance-dialog-body { padding: 8px; }
+  .balance-dialog-header, .balance-dialog-footer { padding: 12px; }
+  .balance-diff th, .balance-diff td { padding: 8px 4px; }
+}

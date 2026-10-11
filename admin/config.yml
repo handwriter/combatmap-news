@@ -154,14 +154,13 @@ collections:
       "name": "balance",
       "label": "Баланс игры",
       "i18n": false,
-      "description": "Правки публикуются в test. Для prod выберите точную ревизию и хэш на странице предпросмотра.",
+      "description": "Правки публикуются в test. Для продакшн или отката выберите ревизию из списка в форме публикации.",
       "files": [
         {
           "name": "test",
           "label": "Тестовый баланс",
           "file": "content/balance/test.json",
           "format": "json",
-          "preview_path": "balance.html",
           "fields": [
             {
               "name": "schemaVersion",
@@ -9422,34 +9421,26 @@ collections:
           "label": "Публикация в продакшн / откат",
           "file": "content/balance/promotion.json",
           "format": "json",
+          "editor": {
+            "preview": false
+          },
           "fields": [
             {
               "name": "sourceCommit",
-              "label": "Git-коммит проверенного test",
-              "widget": "string",
-              "required": false,
-              "pattern": [
-                "^[a-f0-9]{40}$",
-                "Полный SHA: 40 символов"
-              ],
-              "hint": "Скопируйте ревизию со страницы предпросмотра. Весь баланс берётся из этого коммита. Пусто — первоначальный резервный баланс."
+              "label": "Ревизия test для публикации",
+              "widget": "balance_revision",
+              "required": true
             },
             {
               "name": "expectedHash",
-              "label": "Ожидаемый SHA-256 снимка",
-              "widget": "string",
-              "pattern": [
-                "^[a-f0-9]{64}$",
-                "SHA-256: 64 символа"
-              ],
-              "hint": "Скопируйте вместе с ревизией. Несовпадение отменяет публикацию."
+              "widget": "hidden"
             },
             {
               "name": "comment",
               "label": "Комментарий публикации",
               "widget": "text",
               "required": true,
-              "hint": "Что проверено и почему публикуется эта ревизия. Для отката укажите прежний коммит и его хэш."
+              "hint": "Что проверено и почему публикуется эта ревизия. При откате укажите причину возврата."
             }
           ]
         }
