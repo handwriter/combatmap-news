@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "unitDefaults": {
-    "UnitData_Cost": 16,
+    "UnitData_Cost": 15,
     "UnitData_ExcludeFromProduction": false,
     "UnitHealth__maxHealth": 132,
     "UnitHealth__regenStandardPerSecond": 7.8,
