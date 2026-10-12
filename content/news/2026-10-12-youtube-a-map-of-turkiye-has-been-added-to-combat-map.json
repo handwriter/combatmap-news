@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-10-12T13:37:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/pasted-image-1791812277947.png",
+    "title": "YouTube: A map of Turkiye has been added to Combat Map!",
+    "text": "In this video, I tested the Turkey map added to Combat Map! We want to thank everyone who participated in creating this map, and especially Tunca.",
+    "buttonUrl": "https://www.youtube.com/watch?v=NTfRMu9qO48&t=48s"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
