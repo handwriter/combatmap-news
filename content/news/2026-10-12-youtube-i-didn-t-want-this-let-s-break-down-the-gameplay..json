@@ -1,0 +1,31 @@
+{
+  "en": {
+    "type": "news",
+    "priority": 0,
+    "publishedAt": "2026-10-12T13:34:00Z",
+    "startsAt": "",
+    "endsAt": "",
+    "minGameVersion": "",
+    "maxGameVersion": "",
+    "image": "/media/pasted-image-1791812106428.png",
+    "title": "YouTube: I didn't want this! Let's break down the gameplay.",
+    "text": "Let's take a look at the gameplay. What do you do? How do you play against bots? What is the game about?",
+    "buttonUrl": "https://www.youtube.com/watch?v=aVZGiX7jqlE&t=16s"
+  },
+  "ru": {
+    "title": "",
+    "text": ""
+  },
+  "tr": {
+    "title": "",
+    "text": ""
+  },
+  "fr": {
+    "title": "",
+    "text": ""
+  },
+  "ar": {
+    "title": "",
+    "text": ""
+  }
+}
