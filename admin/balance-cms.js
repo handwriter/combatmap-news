@@ -4,6 +4,9 @@ import { registerBalanceRevision } from './balance-revision.js';
 import { registerBalanceHistory } from './balance-history.js';
 import { getCatalog } from './balance-data.js';
 import { definitionDiff, formatBalanceError } from '../balance-diff.js';
+import { registerContentValidation } from './content-validation.js';
+
+registerContentValidation(CMS);
 
 const selectedPromotion = registerBalanceRevision(CMS);
 

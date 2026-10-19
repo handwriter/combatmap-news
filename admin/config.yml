@@ -18,6 +18,12 @@ display_url: https://handwriter.github.io/combatmap-news/
 media_folder: content/media
 public_folder: /media
 
+# File names are generated from titles: keep them to latin letters, digits and dashes
+# (punctuation such as a trailing "." used to produce file names the build rejects).
+slug:
+  encoding: ascii
+  clean_accents: true
+
 i18n:
   structure: single_file
   locales: [en, ru, tr, fr, ar]

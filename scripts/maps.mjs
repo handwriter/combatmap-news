@@ -1,27 +1,16 @@
 import { readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import Ajv from 'ajv/dist/2020.js';
+import { normalizeMapEntry } from '../site/maps-model.js';
+export { MAP_ID, normalizeMapEntry } from '../site/maps-model.js';
 
 export const MAX_MAP_BYTES = 16 * 1024 * 1024;
-export const MAP_ID = /^[a-z0-9][a-z0-9-]{0,79}$/;
 
 /** Must match MapJsonLoader.ComputeContentHash: UTF-8, FNV-1a 64, lowercase hex. */
 export function contentHash(text) {
   let hash = 14695981039346656037n;
   for (const byte of Buffer.from(text, 'utf8')) hash = BigInt.asUintN(64, (hash ^ BigInt(byte)) * 1099511628211n);
   return hash.toString(16).padStart(16, '0');
-}
-
-export function normalizeMapEntry(id, raw) {
-  const errors = [];
-  if (!MAP_ID.test(id)) errors.push('file name must be 1–80 lowercase letters, digits and dashes');
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return { errors: [...errors, 'entry must be an object'] };
-  if (typeof raw.title !== 'string' || !raw.title.trim() || raw.title.trim().length > 80) errors.push('title: required, max 80 characters');
-  if (raw.enabled !== undefined && typeof raw.enabled !== 'boolean') errors.push('enabled: must be boolean');
-  const order = raw.order ?? 0;
-  if (!Number.isSafeInteger(order) || order < 0) errors.push('order: must be a nonnegative integer');
-  if (typeof raw.file !== 'string' || !/^\/map-files\/.+\.json$/.test(raw.file) || /[\\\x00]/.test(raw.file)) errors.push('file: must refer to /map-files/*.json');
-  return { errors, entry: { id, name: typeof raw.title === 'string' ? raw.title.trim() : undefined, enabled: raw.enabled ?? true, order, file: raw.file } };
 }
 
 export function validateMapText(text, validate) {

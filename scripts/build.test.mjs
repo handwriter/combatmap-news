@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { buildFeed, isValidLinkUrl, normalizeEntry } from './build.mjs';
+import { buildFeed, isValidLinkUrl, normalizeEntry, validateNewsDraft } from './build.mjs';
+import { normalizeEntry as sharedNormalizeEntry } from '../site/news-model.js';
 
 
 const valid = (overrides = {}, translations = {}) => ({
@@ -92,4 +93,22 @@ test('feed item omits absent optional blocks', () => {
   const { entry } = normalizeEntry('bare', { en: { publishedAt: '2026-09-28', title: 'Hi' } });
   const [item] = buildFeed([entry], { now: new Date('2026-09-29'), images: new Map() }).items;
   assert.deepEqual(Object.keys(item), ['id', 'type', 'priority', 'publishedAt', 'title']);
+});
+
+test('file names with punctuation, underscores or capitals are rejected', () => {
+  for (const id of ['2026-10-12-gameplay.', 'my_news', 'News']) {
+    assert.ok(normalizeEntry(id, valid()).errors.some((e) => e.startsWith('file name')), id);
+  }
+});
+
+test('CMS draft validation reads translations and explains bad file names', () => {
+  const { en } = valid();
+  assert.deepEqual(validateNewsDraft({ slug: '2026-10-12-ok', data: en, i18n: { ru: { data: { title: 'Привет' } } } }), []);
+  const errors = validateNewsDraft({ slug: '2026-10-12-gameplay.', data: en, i18n: { ru: { data: { title: 'я'.repeat(81) } } } });
+  assert.ok(errors.some((e) => e.startsWith('title.ru: 81 chars')));
+  assert.ok(errors.some((e) => e.startsWith('file name') && e.includes('English title')));
+});
+
+test('build reuses the shared CMS model', () => {
+  assert.equal(normalizeEntry, sharedNormalizeEntry);
 });

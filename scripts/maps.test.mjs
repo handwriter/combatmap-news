@@ -9,6 +9,7 @@ import Ajv from 'ajv/dist/2020.js';
 import { readFile } from 'node:fs/promises';
 import { buildMaps, contentHash, normalizeMapEntry, resolveMapFile, validateMapText } from './maps.mjs';
 import { canonical, hash, resolveDefinition } from './balance.mjs';
+import { normalizeMapEntry as sharedNormalizeMapEntry } from '../site/maps-model.js';
 
 const map = () => ({ id: 'Game map', name: 'Game map', maxPlayers: 2, maxUnitsPerPlayer: 80,
   cameraBounds: { cx: 0, cy: 0, sx: 20, sy: 13 }, terrain: { gridWidth: 2, gridHeight: 2, cells: [1, 2, 3, 4], trees: [] }, players: [{}, {}], bridges: [] });
@@ -113,4 +114,9 @@ test('failed publication preserves the last complete output', async t => {
   assert.match(failed.stderr, /Content build failed/);
   assert.equal(await readFile(feedPath, 'utf8'), previous);
   assert.equal(await readFile(payloadPath, 'utf8'), previousPayload);
+});
+
+test('map entry validation is shared with the CMS', () => {
+  assert.equal(normalizeMapEntry, sharedNormalizeMapEntry);
+  assert.ok(sharedNormalizeMapEntry('0b6c4a0e-1f1e-4c39-9a51-3f7c2d9e8a10', { title: 'Europe', file: '/map-files/europe.json', order: -1 }).errors.includes('order: must be a nonnegative integer'));
 });
