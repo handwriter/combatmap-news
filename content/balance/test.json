@@ -247,7 +247,7 @@
       "TerritoryConfig_UnitProtectedRadius": 0.11,
       "TerritoryConfig_CityProtectedRadius": 0,
       "TerritoryConfig_EncirclementDrainPerSecond": 6,
-      "TerritoryConfig_ErosionRadius": 8,
+      "TerritoryConfig_ErosionRadius": 10,
       "TerritoryConfig_ErosionSpeed": 0.8,
       "TerritoryConfig_EnclaveDecaySpeed": 6,
       "TerritoryConfig_EncirclementMinOwnedCells": 25,
