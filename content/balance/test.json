@@ -12,7 +12,7 @@
     "UnitMorale__regenStandardPerSecond": 2.96,
     "UnitMorale__regenAfterCombatPerSecond": 2,
     "UnitMorale__calmAfterCombatSeconds": 6,
-    "SimpleMovable__speed": 0.0891,
+    "SimpleMovable__speed": 10,
     "SimpleMovable__domain": 0,
     "SimpleMovable__stopDistance": 0.1,
     "SimpleMovable__safeDistance": 0.5,
