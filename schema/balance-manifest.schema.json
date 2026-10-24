@@ -4,7 +4,7 @@
   "additionalProperties": false,
   "required": ["schemaVersion", "channel", "sourceCommit", "hash", "byteSize", "url"],
   "properties": {
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "type": "integer", "minimum": 1 },
     "channel": { "enum": ["prod", "test"] },
     "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
     "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },

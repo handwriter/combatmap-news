@@ -2,12 +2,14 @@
 import { readFile, writeFile, copyFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { canonical, hash, resolveDefinition } from './balance.mjs';
+import { canonical, hash, resolveDefinition, supportedSchemas } from './balance.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(await readFile(path.join(root, 'schema/balance-catalog.json'), 'utf8'));
 const byKey = new Map(catalog.fields.map(f => [f.key, f]));
-const labels = { match: 'Начало матча', cities: 'Города: производство и бонусы', morale: 'Мораль', ranged: 'Подавление регенерации', terrain: 'Местность', territory: 'Территория и окружение', naval: 'Погрузка и высадка', research: 'Исследования', ai: 'ИИ' };
+// Sections absent from the catalog (older schemas) are skipped.
+const allLabels = { match: 'Начало матча', combat: 'Бой и лимит войск', cities: 'Города: производство и бонусы', morale: 'Мораль', ranged: 'Подавление регенерации', terrain: 'Местность', territory: 'Территория и окружение', naval: 'Погрузка и высадка', research: 'Исследования', ai: 'ИИ' };
+const labels = Object.fromEntries(Object.entries(allLabels).filter(([section]) => catalog.fields.some(f => f.section === section)));
 const entityNames = { base_unit: 'Базовый юнит / пехота', engineer_unit: 'Инженеры', cavalry_unit: 'Кавалерия', tank_unit: 'Танк', machinegun_unit: 'Пулемётчики', artillery_unit: 'Артиллерия', barge_unit: 'Баржа', city: 'Город', city_capital: 'Столица' };
 const selectOptions = f => f.options.map(v => ({ value: Number(v), label: f.path === '_domain' ? ['Наземный', 'Морской'][v] : f.path === '_prFlightType' ? ['Наземный', 'Навесной'][v] : f.path.endsWith('.Effect') ? ['Открыть юнит', 'Повысить лимит войск', 'Открыть морскую конверсию'][v] : v }));
 const unitsOptions = catalog.units.map(u => ({ label: entityNames[u.id] || u.label, value: u.id }));
@@ -16,7 +18,7 @@ function terrainFields() {
   return [
     { name: 'Type', label: 'Поверхность', widget: 'select', options: Array.from({ length: 8 }, (_, value) => ({ value, label: ['Пусто', 'Равнина', 'Холмы', 'Горы', 'Вода', 'Город', 'Песок', 'Снег'][value] })), hint: 'Существующий тип поверхности. В эффекте леса это поле не участвует в расчёте.' },
     ...['AffectedUnitIds', 'ExcludedUnitIds'].map((name, i) => ({ name, label: i ? 'Исключённые юниты' : 'Затронутые юниты', widget: 'select', multiple: true, required: false, options: unitsOptions, hint: i ? 'Пусто — нет исключений.' : 'Пусто — правило действует на все типы.' })),
-    ...[['MovementSpeedMultiplier', 'Скорость движения'], ['OutgoingDamageMultiplier', 'Наносимый урон'], ['IncomingDamageMultiplier', 'Получаемый урон'], ['RegenMultiplier', 'Регенерация HP'], ['DamageOverTimePerSecond', 'Урон поверхности']].map(([name, label]) => ({ name, label, widget: 'number', value_type: 'float', min: 0, max: name === 'DamageOverTimePerSecond' ? 100000 : 100, hint: name === 'DamageOverTimePerSecond' ? 'HP/с на поверхности. 0 — без урона.' : 'Множитель: 1 — обычное значение, 0 — выключить соответствующее действие.' }))
+    ...[['MovementSpeedMultiplier', 'Скорость движения'], ['OutgoingDamageMultiplier', 'Наносимый урон'], ['IncomingDamageMultiplier', 'Получаемый урон'], ['RegenMultiplier', 'Регенерация HP'], ['DamageOverTimePerSecond', 'Урон поверхности']].map(([name, label]) => ({ name, label, widget: 'number', value_type: 'float', min: 0, max: name === 'DamageOverTimePerSecond' ? 100000 : 100, hint: name === 'DamageOverTimePerSecond' ? '% макс. HP юнита в секунду на поверхности. 0 — без урона.' : 'Множитель: 1 — обычное значение, 0 — выключить соответствующее действие.' }))
   ];
 }
 function field(f, override = false) {
@@ -98,7 +100,11 @@ const definition = { $schema: 'https://json-schema.org/draft/2020-12/schema', ..
 await writeFile(path.join(root, 'schema/balance-definition.schema.json'), JSON.stringify(definition, null, 2) + '\n');
 const baselinePath = path.join(root, 'content/balance/prod-bootstrap.json');
 try { await readFile(baselinePath); } catch (e) { if (e.code !== 'ENOENT') throw e; await copyFile(path.join(root, 'content/balance/exported-baseline.json'), baselinePath); }
-const baseline = resolveDefinition(JSON.parse(await readFile(baselinePath, 'utf8')), catalog).snapshot;
 const promotionPath = path.join(root, 'content/balance/promotion.json');
-try { await readFile(promotionPath); } catch (e) { if (e.code !== 'ENOENT') throw e; await writeFile(promotionPath, JSON.stringify({ sourceCommit: '', expectedHash: hash(canonical(baseline)), comment: 'Первоначальный баланс, экспортированный из Unity.' }, null, 2) + '\n'); }
+try { await readFile(promotionPath); } catch (e) {
+  if (e.code !== 'ENOENT') throw e;
+  // The frozen bootstrap may belong to an older schema than the current catalog.
+  const bootstrap = JSON.parse(await readFile(baselinePath, 'utf8'));
+  const baseline = resolveDefinition(bootstrap, (await supportedSchemas(root)).schemas.get(bootstrap.schemaVersion).catalog).snapshot;
+  await writeFile(promotionPath, JSON.stringify({ sourceCommit: '', expectedHash: hash(canonical(baseline)), comment: 'Первоначальный баланс, экспортированный из Unity.' }, null, 2) + '\n'); }
 console.log(`Balance CMS: ${catalog.fields.length} fields, ${catalog.units.length} unit types. Existing content preserved.`);

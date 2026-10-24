@@ -1,12 +1,12 @@
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import path from 'node:path';
 
 const exec = promisify(execFile);
-import { canonical, resolveDefinition, validateSnapshot, validatePromotion } from '../site/balance-model.js';
-export { canonical, normalizeDefinition, resolveDefinition, validateSnapshot } from '../site/balance-model.js';
+import { canonical, convertSnapshot, resolveDefinition, validateSnapshot, validatePromotion } from '../site/balance-model.js';
+export { canonical, convertSnapshot, normalizeDefinition, resolveDefinition, validateSnapshot } from '../site/balance-model.js';
 export const hash = text => createHash('sha256').update(text).digest('hex');
 
 async function git(root, ...args) { return (await exec('git', args, { cwd: root, maxBuffer: 2 * 1024 * 1024 })).stdout.trim(); }
@@ -27,25 +27,51 @@ async function promoted(root, promotion, catalog, commit) {
   const historicalCatalog = await at(root, promotion.sourceCommit, 'schema/balance-catalog.json');
   return { ...resolveDefinition(await at(root, promotion.sourceCommit, 'content/balance/test.json'), historicalCatalog), catalog: historicalCatalog, sourceCommit: promotion.sourceCommit };
 }
+// Every schema the site still serves: the current catalog plus frozen catalogs of schemas that
+// released clients use. Each legacy schema also keeps frozen per-channel snapshots: they supply
+// values the current model cannot express in that schema.
+export async function supportedSchemas(root) {
+  const current = await json(root, 'schema/balance-catalog.json');
+  const schemas = new Map([[current.schemaVersion, { catalog: current }]]);
+  let files = [];
+  try { files = await readdir(path.join(root, 'schema/legacy')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+  for (const file of files) {
+    const match = /^balance-catalog\.v(\d+)\.json$/.exec(file);
+    if (!match) continue;
+    const catalog = await json(root, `schema/legacy/${file}`);
+    if (catalog.schemaVersion !== Number(match[1]) || catalog.schemaVersion >= current.schemaVersion) throw Error(`schema/legacy/${file}: неверная версия схемы`);
+    const fallback = {};
+    for (const channel of ['test', 'prod']) {
+      fallback[channel] = await json(root, `content/balance/legacy/v${catalog.schemaVersion}/${channel}.json`);
+      validateSnapshot(fallback[channel], catalog);
+    }
+    schemas.set(catalog.schemaVersion, { catalog, fallback });
+  }
+  return { current, schemas };
+}
 export async function buildBalance(root) {
-  const catalog = await json(root, 'schema/balance-catalog.json');
+  const { current: catalog, schemas } = await supportedSchemas(root);
   const test = resolveDefinition(await json(root, 'content/balance/test.json'), catalog);
+  let exported;
   const promotion = await json(root, 'content/balance/promotion.json');
   validatePromotion(promotion);
   const head = await git(root, 'rev-parse', 'HEAD');
-  let prod, sourceCommit;
+  let prod, prodCatalog, sourceCommit;
   if (promotion.sourceCommit === '') {
     // The initial release is an immutable exported baseline, independent of subsequent test edits.
-    prod = resolveDefinition(await json(root, 'content/balance/prod-bootstrap.json'), catalog);
+    const bootstrap = await json(root, 'content/balance/prod-bootstrap.json');
+    prodCatalog = schemas.get(bootstrap.schemaVersion)?.catalog;
+    if (!prodCatalog) throw Error(`prod-bootstrap.json: схема ${bootstrap.schemaVersion} больше не поддерживается`);
+    prod = resolveDefinition(bootstrap, prodCatalog);
     sourceCommit = await git(root, 'log', '-1', '--format=%H', '--', 'content/balance/prod-bootstrap.json') || head;
   } else {
     if (!/^[a-f0-9]{40}$/.test(promotion.sourceCommit)) throw Error('Продвижение требует полный Git SHA (40 символов)');
     sourceCommit = promotion.sourceCommit;
     await git(root, 'merge-base', '--is-ancestor', sourceCommit, head);
-    const historicCatalog = JSON.parse(await git(root, 'show', `${sourceCommit}:schema/balance-catalog.json`));
+    prodCatalog = JSON.parse(await git(root, 'show', `${sourceCommit}:schema/balance-catalog.json`));
     const historicDefinition = JSON.parse(await git(root, 'show', `${sourceCommit}:content/balance/test.json`));
-    prod = resolveDefinition(historicDefinition, historicCatalog);
-    validateSnapshot(prod.snapshot, catalog);
+    // The promoted revision keeps its own schema; every served schema gets a converted copy below.
+    prod = resolveDefinition(historicDefinition, prodCatalog);
   }
   const prodText = canonical(prod.snapshot);
   if (!/^[a-f0-9]{64}$/.test(promotion.expectedHash) || hash(prodText) !== promotion.expectedHash) throw Error('Хэш выбранной ревизии prod не совпадает с ожидаемым');
@@ -58,6 +84,23 @@ export async function buildBalance(root) {
     return { schemaVersion: resolved.snapshot.schemaVersion, channel, sourceCommit: commit, hash: digest, byteSize, url: `snapshots/${digest}.json` };
   };
   const testManifest = manifest('test', test, head), prodManifest = manifest('prod', prod, sourceCommit);
+  // Client-facing output per schema: s{N}/{channel}.json with its own snapshots directory.
+  const schemaOutputs = [];
+  for (const [schemaVersion, schema] of [...schemas].sort((a, b) => a[0] - b[0])) {
+    // The Unity export fills fields a promoted older revision lacks in the current schema.
+    const fallback = async channel => schemaVersion !== catalog.schemaVersion ? schema.fallback[channel]
+      : exported ??= resolveDefinition(await json(root, 'content/balance/exported-baseline.json'), catalog).snapshot;
+    const output = { schemaVersion, payloads: new Map() };
+    for (const [channel, resolved, from, commit] of [['test', test, catalog, head], ['prod', prod, prodCatalog, sourceCommit]]) {
+      const snapshot = canonical(from) === canonical(schema.catalog) ? resolved.snapshot
+        : convertSnapshot(resolved.snapshot, from, schema.catalog, await fallback(channel));
+      const text = canonical(snapshot), digest = hash(text);
+      output.payloads.set(digest, text);
+      output[channel] = { snapshot, manifest: { schemaVersion, channel, sourceCommit: commit, hash: digest, byteSize: Buffer.byteLength(text), url: `snapshots/${digest}.json` } };
+    }
+    schemaOutputs.push(output);
+  }
+  const currentOutput = schemaOutputs.find(o => o.schemaVersion === catalog.schemaVersion);
   const modelUrl = (resolved, modelCatalog) => {
     const text = canonical({ definition: resolved.definition, catalog: modelCatalog });
     const url = `history/${hash(text)}.json`;
@@ -121,5 +164,7 @@ export async function buildBalance(root) {
   const orderedRevisions = [revisions[0], ...revisions.slice(1).sort((a, b) => Date.parse(b.committedAt) - Date.parse(a.committedAt))];
   return { payloads, historyData, testManifest, prodManifest, revisions: orderedRevisions, testHistory,
     publication: { ...publication, deployCommit: head }, productionHistory: { publications, deploymentCommits },
-    preview: { catalog, test: { ...test, manifest: testManifest }, prod: { ...prod, manifest: prodManifest }, promotion } };
+    schemaOutputs,
+    // The preview page renders the current catalog, so prod is shown converted to it.
+    preview: { catalog, test: { ...test, manifest: testManifest }, prod: { ...prod, snapshot: currentOutput.prod.snapshot, manifest: prodManifest }, promotion } };
 }

@@ -138,3 +138,40 @@ export function validatePromotion(raw) {
   if (typeof raw.comment !== 'string' || !raw.comment.trim() || raw.comment.length > 2000) throw Error('Нужен комментарий публикации, максимум 2000 символов');
 }
 
+
+// Schema evolution. A value moves between schemas only when both catalogs define the field the
+// same way (ranges are checked per value); everything else comes from a fallback snapshot of the
+// target schema. A changed meaning is declared by raising the field's `revision`.
+const sameList = (a = [], b = []) => a.length === b.length && a.every((v, i) => v === b[i]);
+export function sameDefinition(a, from, b, to) {
+  if (!a || !b) return false;
+  for (const key of ['key', 'kind', 'target', 'path', 'section', 'world']) if (a[key] !== b[key]) return false;
+  if ((a.revision ?? 1) !== (b.revision ?? 1) || !sameList(a.options ?? [], b.options ?? [])) return false;
+  if (['unitId', 'terrainEntries', 'terrainEntry'].includes(a.kind)) return sameList(from.units.map(u => u.id), to.units.map(u => u.id));
+  if (a.kind === 'techIds') return sameList(from.techIds, to.techIds);
+  return true;
+}
+export function convertSnapshot(snapshot, from, to, fallback) {
+  if (fallback.schemaVersion !== to.schemaVersion) throw Error(`Запасной снимок схемы ${fallback.schemaVersion} не подходит для схемы ${to.schemaVersion}`);
+  const oldFields = new Map(from.fields.map(f => [f.key, f])), fields = new Map(to.fields.map(f => [f.key, f]));
+  const pick = (f, values, keysOfSource, fallbackValue, where) => {
+    if (values && keysOfSource.includes(f.key) && Object.hasOwn(values, f.key) && sameDefinition(oldFields.get(f.key), from, f, to)) {
+      try { value(values[f.key], f, to, where); return structuredClone(values[f.key]); } catch { /* out of the target range */ }
+    }
+    if (fallbackValue === undefined) throw Error(`${where}.${f.key}: нет значения в запасном снимке`);
+    return structuredClone(fallbackValue);
+  };
+  const result = { schemaVersion: to.schemaVersion, units: {}, cities: {}, globals: {} };
+  for (const group of ['units', 'cities'])
+    for (const e of to[group]) {
+      const old = from[group].find(x => x.id === e.id);
+      result[group][e.id] = Object.fromEntries(e.fields.map(key => [key,
+        pick(fields.get(key), old && snapshot[group][e.id], old?.fields ?? [], fallback[group][e.id]?.[key], e.id)]));
+    }
+  for (const f of to.fields.filter(f => !['unit', 'city'].includes(f.section))) {
+    const values = snapshot.globals[f.section];
+    (result.globals[f.section] ??= {})[f.key] = pick(f, values, values ? Object.keys(values) : [], fallback.globals[f.section]?.[f.key], f.section);
+  }
+  validateSnapshot(result, to);
+  return result;
+}

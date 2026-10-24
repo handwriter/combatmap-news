@@ -84,7 +84,9 @@ test('failed publication preserves the last complete output', async t => {
   // The full publisher needs a valid balance revision, independent of the live promotion.
   const balanceDir = path.join(root, 'content/balance');
   await mkdir(balanceDir, { recursive: true });
-  const baseline = await readFile(new URL('../content/balance/prod-bootstrap.json', import.meta.url), 'utf8');
+  // The Unity export is always in the current schema; the frozen bootstrap may be older.
+  const baseline = await readFile(new URL('../content/balance/exported-baseline.json', import.meta.url), 'utf8');
+  await cp(new URL('../content/balance/legacy/', import.meta.url), path.join(balanceDir, 'legacy'), { recursive: true });
   const catalog = JSON.parse(await readFile(path.join(root, 'schema/balance-catalog.json'), 'utf8'));
   await writeFile(path.join(balanceDir, 'test.json'), baseline);
   await writeFile(path.join(balanceDir, 'prod-bootstrap.json'), baseline);

@@ -11,7 +11,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "const": 2
     },
     "unitDefaults": {
       "type": "object",
@@ -19,10 +19,14 @@
       "required": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -98,6 +102,11 @@
         "UnitData_ExcludeFromProduction": {
           "type": "boolean"
         },
+        "UnitData_TroopLimitCost": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
         "UnitHealth__maxHealth": {
           "type": "number",
           "minimum": 0.01,
@@ -117,6 +126,21 @@
           "type": "number",
           "minimum": 0,
           "maximum": 100000
+        },
+        "UnitHealth__meleeResistance": {
+          "type": "number",
+          "minimum": -1000,
+          "maximum": 100
+        },
+        "UnitHealth__bulletResistance": {
+          "type": "number",
+          "minimum": -1000,
+          "maximum": 100
+        },
+        "UnitHealth__explosiveResistance": {
+          "type": "number",
+          "minimum": -1000,
+          "maximum": 100
         },
         "UnitMorale__maxMorale": {
           "type": "number",
@@ -453,6 +477,11 @@
             "UnitData_ExcludeFromProduction": {
               "type": "boolean"
             },
+            "UnitData_TroopLimitCost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
             "UnitHealth__maxHealth": {
               "type": "number",
               "minimum": 0.01,
@@ -472,6 +501,21 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100000
+            },
+            "UnitHealth__meleeResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__bulletResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__explosiveResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
             },
             "UnitMorale__maxMorale": {
               "type": "number",
@@ -803,6 +847,11 @@
             "UnitData_ExcludeFromProduction": {
               "type": "boolean"
             },
+            "UnitData_TroopLimitCost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
             "UnitHealth__maxHealth": {
               "type": "number",
               "minimum": 0.01,
@@ -822,6 +871,21 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100000
+            },
+            "UnitHealth__meleeResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__bulletResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__explosiveResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
             },
             "UnitMorale__maxMorale": {
               "type": "number",
@@ -1153,6 +1217,11 @@
             "UnitData_ExcludeFromProduction": {
               "type": "boolean"
             },
+            "UnitData_TroopLimitCost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
             "UnitHealth__maxHealth": {
               "type": "number",
               "minimum": 0.01,
@@ -1172,6 +1241,21 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100000
+            },
+            "UnitHealth__meleeResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__bulletResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__explosiveResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
             },
             "UnitMorale__maxMorale": {
               "type": "number",
@@ -1503,6 +1587,11 @@
             "UnitData_ExcludeFromProduction": {
               "type": "boolean"
             },
+            "UnitData_TroopLimitCost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
             "UnitHealth__maxHealth": {
               "type": "number",
               "minimum": 0.01,
@@ -1522,6 +1611,21 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100000
+            },
+            "UnitHealth__meleeResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__bulletResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__explosiveResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
             },
             "UnitMorale__maxMorale": {
               "type": "number",
@@ -1853,6 +1957,11 @@
             "UnitData_ExcludeFromProduction": {
               "type": "boolean"
             },
+            "UnitData_TroopLimitCost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
             "UnitHealth__maxHealth": {
               "type": "number",
               "minimum": 0.01,
@@ -1872,6 +1981,21 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100000
+            },
+            "UnitHealth__meleeResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__bulletResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__explosiveResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
             },
             "UnitMorale__maxMorale": {
               "type": "number",
@@ -2203,6 +2327,11 @@
             "UnitData_ExcludeFromProduction": {
               "type": "boolean"
             },
+            "UnitData_TroopLimitCost": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
             "UnitHealth__maxHealth": {
               "type": "number",
               "minimum": 0.01,
@@ -2222,6 +2351,21 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100000
+            },
+            "UnitHealth__meleeResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__bulletResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
+            },
+            "UnitHealth__explosiveResistance": {
+              "type": "number",
+              "minimum": -1000,
+              "maximum": 100
             },
             "UnitMorale__maxMorale": {
               "type": "number",
@@ -2597,6 +2741,7 @@
       "additionalProperties": false,
       "required": [
         "match",
+        "combat",
         "cities",
         "morale",
         "ranged",
@@ -2621,6 +2766,26 @@
             }
           }
         },
+        "combat": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UnitsConfig_GlobalDamageMultiplier",
+            "MapsConfig_TroopLimitBonus"
+          ],
+          "properties": {
+            "UnitsConfig_GlobalDamageMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "MapsConfig_TroopLimitBonus": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000
+            }
+          }
+        },
         "cities": {
           "type": "object",
           "additionalProperties": false,
@@ -2628,6 +2793,7 @@
             "MapsConfig_CitySettings_InfluenceRadius",
             "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier",
             "MapsConfig_CitySettings_BuffSettings_RegenMultiplier",
+            "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier",
             "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed",
             "MapsConfig_CitySettings_ProductionSettings_SwitchingPenaltySeconds",
             "MapsConfig_CitySettings_ProductionSettings_CapturePenaltySeconds",
@@ -2647,6 +2813,11 @@
             "MapsConfig_CitySettings_BuffSettings_RegenMultiplier": {
               "type": "number",
               "minimum": 0,
+              "maximum": 100
+            },
+            "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier": {
+              "type": "number",
+              "minimum": 0.01,
               "maximum": 100
             },
             "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed": {

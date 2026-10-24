@@ -1,6 +1,6 @@
 import { canonical, normalizeDefinition, resolveDefinition } from './balance-model.js';
 
-export const sectionLabels = { match: 'Начало матча', cities: 'Города: производство и бонусы', morale: 'Мораль', ranged: 'Подавление регенерации', terrain: 'Местность', territory: 'Территория и окружение', naval: 'Погрузка и высадка', research: 'Исследования', ai: 'ИИ' };
+export const sectionLabels = { match: 'Начало матча', combat: 'Бой и лимит войск', cities: 'Города: производство и бонусы', morale: 'Мораль', ranged: 'Подавление регенерации', terrain: 'Местность', territory: 'Территория и окружение', naval: 'Погрузка и высадка', research: 'Исследования', ai: 'ИИ' };
 export const entityLabels = { base_unit: 'Базовый юнит', engineer_unit: 'Инженеры', cavalry_unit: 'Кавалерия', tank_unit: 'Танк', machinegun_unit: 'Пулемётчики', artillery_unit: 'Артиллерия', barge_unit: 'Баржа', city: 'Город', city_capital: 'Столица' };
 const get = (data, path) => path.reduce((value, key) => value?.[key], data);
 const owns = (data, path) => Object.hasOwn(get(data, path.slice(0, -1)) || {}, path.at(-1));

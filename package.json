@@ -8,6 +8,7 @@
   },
   "scripts": {
     "balance:editor": "node scripts/balance-editor.mjs",
+    "balance:migrate": "node scripts/balance-migrate.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test scripts/*.test.mjs"
   },

@@ -121,10 +121,13 @@ async function main() {
   const validateBalance = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/balance-snapshot.schema.json'), 'utf8')));
   const validateDefinition = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/balance-definition.schema.json'), 'utf8')));
   const validateManifest = ajv.compile(JSON.parse(await readFile(path.join(ROOT, 'schema/balance-manifest.schema.json'), 'utf8')));
+  // The editable model and both preview snapshots use the current schema; the promoted prod
+  // definition may belong to an older one and is validated by its own catalog in buildBalance.
+  if (!validateDefinition(balance.preview.test.definition)) throw new Error(`Invalid test balance: ${JSON.stringify(validateDefinition.errors)}`);
   for (const channel of ['test', 'prod']) {
-    if (!validateDefinition(balance.preview[channel].definition) || !validateBalance(balance.preview[channel].snapshot) || !validateManifest(balance[`${channel}Manifest`])) {
-      throw new Error(`Invalid ${channel} balance: ${JSON.stringify(validateDefinition.errors || validateBalance.errors || validateManifest.errors)}`);
-    }
+    if (!validateBalance(balance.preview[channel].snapshot)) throw new Error(`Invalid ${channel} balance: ${JSON.stringify(validateBalance.errors)}`);
+    for (const output of balance.schemaOutputs)
+      if (!validateManifest(output[channel].manifest)) throw new Error(`Invalid s${output.schemaVersion} ${channel} manifest: ${JSON.stringify(validateManifest.errors)}`);
   }
   // Nothing replaces the previous output until BOTH feeds and every enabled map are valid.
   const dist = path.join(ROOT, 'dist');
@@ -133,7 +136,15 @@ async function main() {
   await mkdir(path.join(dist, 'v1/maps'), { recursive: true });
   await mkdir(path.join(dist, 'v1/balance/snapshots'), { recursive: true });
   for (const [hash, text] of balance.payloads) await writeFile(path.join(dist, 'v1/balance/snapshots', `${hash}.json`), text);
-  for (const channel of ['test', 'prod']) await writeFile(path.join(dist, 'v1/balance', `${channel}.json`), JSON.stringify(balance[`${channel}Manifest`], null, 2) + '\n');
+  for (const output of balance.schemaOutputs) {
+    // Schema 1 clients were released with {base}/{channel}.json; later schemas use s{N}/.
+    const dirs = [`v1/balance/s${output.schemaVersion}`, ...(output.schemaVersion === 1 ? ['v1/balance'] : [])];
+    for (const dir of dirs) {
+      await mkdir(path.join(dist, dir, 'snapshots'), { recursive: true });
+      for (const [hash, text] of output.payloads) await writeFile(path.join(dist, dir, 'snapshots', `${hash}.json`), text);
+      for (const channel of ['test', 'prod']) await writeFile(path.join(dist, dir, `${channel}.json`), JSON.stringify(output[channel].manifest, null, 2) + '\n');
+    }
+  }
   await writeFile(path.join(dist, 'v1/balance/preview.json'), JSON.stringify(balance.preview) + '\n');
   await writeFile(path.join(dist, 'v1/balance/revisions.json'), JSON.stringify(balance.revisions) + '\n');
   await mkdir(path.join(dist, 'v1/balance/history'), { recursive: true });

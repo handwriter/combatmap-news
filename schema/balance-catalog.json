@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "fields": [
     {
       "key": "UnitData_Cost",
@@ -12,7 +12,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitData_ExcludeFromProduction",
@@ -25,7 +26,22 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
+    },
+    {
+      "key": "UnitData_TroopLimitCost",
+      "section": "unit",
+      "target": "UnitData",
+      "path": "TroopLimitCost",
+      "label": "Цена в лимите войск",
+      "hint": "Очки лимита войск, которые занимает юнит. Баржа занимает очки исходного юнита. Диапазон: 1–100. Ноль недопустим.",
+      "kind": "integer",
+      "min": 1.0,
+      "max": 100.0,
+      "options": null,
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitHealth__maxHealth",
@@ -38,7 +54,8 @@
       "min": 0.01,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitHealth__regenStandardPerSecond",
@@ -51,7 +68,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitHealth__regenAfterCombatPerSecond",
@@ -64,7 +82,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitHealth__calmAfterCombatSettings",
@@ -77,7 +96,50 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
+    },
+    {
+      "key": "UnitHealth__meleeResistance",
+      "section": "unit",
+      "target": "UnitHealth",
+      "path": "_meleeResistance",
+      "label": "Сопротивление ближнему бою",
+      "hint": "Проценты: +25 — получает на 25% меньше, −200 — в 3 раза больше. 0 — без изменений. Диапазон: -1000–100.",
+      "kind": "number",
+      "min": -1000.0,
+      "max": 100.0,
+      "options": null,
+      "world": false,
+      "revision": 1
+    },
+    {
+      "key": "UnitHealth__bulletResistance",
+      "section": "unit",
+      "target": "UnitHealth",
+      "path": "_bulletResistance",
+      "label": "Сопротивление пулям",
+      "hint": "Проценты против невзрывных снарядов: + защита, − уязвимость. 0 — без изменений. Диапазон: -1000–100.",
+      "kind": "number",
+      "min": -1000.0,
+      "max": 100.0,
+      "options": null,
+      "world": false,
+      "revision": 1
+    },
+    {
+      "key": "UnitHealth__explosiveResistance",
+      "section": "unit",
+      "target": "UnitHealth",
+      "path": "_explosiveResistance",
+      "label": "Сопротивление взрывам",
+      "hint": "Проценты против взрывных снарядов, включая урон по площади: + защита, − уязвимость. 0 — без изменений. Диапазон: -1000–100.",
+      "kind": "number",
+      "min": -1000.0,
+      "max": 100.0,
+      "options": null,
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__maxMorale",
@@ -90,7 +152,8 @@
       "min": 0.01,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__drainMeleePerSecond",
@@ -103,7 +166,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__regenStandardPerSecond",
@@ -116,7 +180,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__regenAfterCombatPerSecond",
@@ -129,7 +194,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__calmAfterCombatSeconds",
@@ -142,7 +208,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__speed",
@@ -155,7 +222,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__domain",
@@ -171,7 +239,8 @@
         "0",
         "1"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__stopDistance",
@@ -184,7 +253,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__safeDistance",
@@ -197,7 +267,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__weight",
@@ -210,7 +281,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__immovable",
@@ -223,7 +295,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__retreatSpeedMultiplier",
@@ -236,7 +309,8 @@
       "min": 0.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__pushForce",
@@ -249,7 +323,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__pushCoefficient",
@@ -262,7 +337,8 @@
       "min": 0.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__greenSectorHalfAngle",
@@ -275,7 +351,8 @@
       "min": 0.0,
       "max": 180.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__blockedSectorHalfAngle",
@@ -288,7 +365,8 @@
       "min": 0.0,
       "max": 180.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MeleeAttacker__damage",
@@ -301,7 +379,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MeleeAttacker__attackCooldown",
@@ -314,7 +393,8 @@
       "min": 0.01,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__isRangedCombat",
@@ -327,7 +407,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__autoFireEnabled",
@@ -340,7 +421,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__prSize",
@@ -353,7 +435,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__prDamage",
@@ -366,7 +449,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__prSpeed",
@@ -379,7 +463,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__prFlightType",
@@ -395,7 +480,8 @@
         "0",
         "1"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__isPrExplodes",
@@ -408,7 +494,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__explosionArea",
@@ -421,7 +508,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__prLifetime",
@@ -434,7 +522,8 @@
       "min": 0.01,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__firingRange",
@@ -447,7 +536,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__aimTime_x",
@@ -460,7 +550,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__aimTime_y",
@@ -473,7 +564,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__cooldownTime_x",
@@ -486,7 +578,8 @@
       "min": 0.01,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__cooldownTime_y",
@@ -499,7 +592,8 @@
       "min": 0.01,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__numberOfShellsPerBurst",
@@ -512,7 +606,8 @@
       "min": 1.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__timeBetweenShellsQueue",
@@ -525,7 +620,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedAttacker__spreadAngle",
@@ -538,7 +634,8 @@
       "min": 0.0,
       "max": 180.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitDeployment__requiresDeployment",
@@ -551,7 +648,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitDeployment__deployTime",
@@ -564,7 +662,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitDeployment__undeployTime",
@@ -577,7 +676,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConversion__convertTime",
@@ -590,7 +690,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConversion__isNavalForm",
@@ -603,7 +704,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "Unit__influenceProtectedRadius",
@@ -616,7 +718,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "Unit__affectsTerritory",
@@ -629,7 +732,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "BodyCircle_radius",
@@ -642,7 +746,8 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
     },
     {
       "key": "DetectionCircle_radius",
@@ -655,7 +760,8 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
     },
     {
       "key": "EngagementCircle_radius",
@@ -668,7 +774,8 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
     },
     {
       "key": "BodyBox_size_x",
@@ -681,7 +788,8 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
     },
     {
       "key": "BodyBox_size_y",
@@ -694,7 +802,8 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
     },
     {
       "key": "CaptureCircle_radius",
@@ -707,7 +816,8 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
     },
     {
       "key": "CityBodyCircle_radius",
@@ -720,7 +830,36 @@
       "min": 0.001,
       "max": 1000.0,
       "options": null,
-      "world": true
+      "world": true,
+      "revision": 1
+    },
+    {
+      "key": "UnitsConfig_GlobalDamageMultiplier",
+      "section": "combat",
+      "target": "UnitsConfig",
+      "path": "GlobalDamageMultiplier",
+      "label": "Глобальный множитель урона",
+      "hint": "Последний множитель урона ближнего боя, пуль и взрывов. На воду, окружение и мораль не действует. 1 — без изменений. Диапазон: 0–100.",
+      "kind": "number",
+      "min": 0.0,
+      "max": 100.0,
+      "options": null,
+      "world": false,
+      "revision": 1
+    },
+    {
+      "key": "MapsConfig_TroopLimitBonus",
+      "section": "combat",
+      "target": "MapsConfig",
+      "path": "TroopLimitBonus",
+      "label": "Прибавка к лимиту войск карты",
+      "hint": "Очки лимита, добавляемые к лимиту каждой карты. 0 — лимит карты без изменений. Диапазон: 0–10000.",
+      "kind": "integer",
+      "min": 0.0,
+      "max": 10000.0,
+      "options": null,
+      "world": false,
+      "revision": 1
     },
     {
       "key": "GameConfig_MatchStartCountdown",
@@ -733,7 +872,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_InfluenceRadius",
@@ -746,7 +886,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier",
@@ -759,7 +900,8 @@
       "min": 0.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_BuffSettings_RegenMultiplier",
@@ -772,7 +914,22 @@
       "min": 0.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
+    },
+    {
+      "key": "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier",
+      "section": "cities",
+      "target": "MapsConfig",
+      "path": "CitySettings.BuffSettings.PushResistanceMultiplier",
+      "label": "Устойчивость к толканию в городе",
+      "hint": "Множитель веса любого юнита в зоне города, чей бы город ни был. 1 — без изменений. Диапазон: 0.01–100. Ноль недопустим.",
+      "kind": "number",
+      "min": 0.01,
+      "max": 100.0,
+      "options": null,
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed",
@@ -785,7 +942,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_ProductionSettings_SwitchingPenaltySeconds",
@@ -798,7 +956,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_ProductionSettings_CapturePenaltySeconds",
@@ -811,7 +970,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MapsConfig_CitySettings_ProductionSettings_DefaultStandardUnitId",
@@ -824,7 +984,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MoraleConfig_MoraleMultiplierFloor",
@@ -837,7 +998,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MoraleConfig_MoraleAttackMultiplier",
@@ -850,7 +1012,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MoraleConfig_MoraleEncirclementMultiplier",
@@ -863,7 +1026,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MoraleConfig_MoraleDamageBullet",
@@ -876,7 +1040,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "MoraleConfig_MoraleDamageExplosion",
@@ -889,7 +1054,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "RangedCombatConfig_RegenSuppressionAfterHit",
@@ -902,7 +1068,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_Entries",
@@ -910,12 +1077,13 @@
       "target": "TerrainEffectsConfig",
       "path": "Entries",
       "label": "Правила поверхностей",
-      "hint": "Правила перемножаются при совпадении поверхности и типа юнита. Пустой список — без эффектов.",
+      "hint": "Правила перемножаются при совпадении поверхности и типа юнита. Урон поверхности — % макс. HP в секунду. Пустой список — без эффектов.",
       "kind": "terrainEntries",
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 2
     },
     {
       "key": "TerrainEffectsConfig_ForestEffect",
@@ -928,7 +1096,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_ForestTreeThreshold",
@@ -941,7 +1110,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_PathfindingDpsWeight",
@@ -954,7 +1124,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_PathfindingWaterCost",
@@ -967,7 +1138,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_PathfindingEdgeComfort",
@@ -980,7 +1152,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_PathfindingEdgePenalty",
@@ -993,7 +1166,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_PathfindingLandingWalkCost",
@@ -1006,7 +1180,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_MountainEdgeClearance",
@@ -1019,7 +1194,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerrainEffectsConfig_NoSidestepIntoWater",
@@ -1032,7 +1208,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_UnitInfluenceRadius",
@@ -1045,7 +1222,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_CityInfluenceRadius",
@@ -1058,7 +1236,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_UnitProtectedRadius",
@@ -1071,7 +1250,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_CityProtectedRadius",
@@ -1084,20 +1264,22 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EncirclementDrainPerSecond",
       "section": "territory",
       "target": "TerritoryConfig",
       "path": "EncirclementDrainPerSecond",
-      "label": "Урон HP от окружения",
-      "hint": "HP/с у окружённого юнита. 0 — без урона от окружения. Диапазон: 0–100000.",
+      "label": "Урон от окружения",
+      "hint": "% макс. HP в секунду у окружённого юнита. 0 — без урона от окружения. Диапазон: 0–100000.",
       "kind": "number",
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 2
     },
     {
       "key": "TerritoryConfig_ErosionRadius",
@@ -1110,7 +1292,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_ErosionSpeed",
@@ -1123,7 +1306,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EnclaveDecaySpeed",
@@ -1136,7 +1320,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EncirclementMinOwnedCells",
@@ -1149,7 +1334,8 @@
       "min": 1.0,
       "max": 196608.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EncirclementMinIslandSize",
@@ -1162,7 +1348,8 @@
       "min": 1.0,
       "max": 196608.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EncirclementEscapeRadius",
@@ -1175,7 +1362,8 @@
       "min": 1.0,
       "max": 196608.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_NeutralEnclaveMaxCells",
@@ -1188,7 +1376,8 @@
       "min": 1.0,
       "max": 196608.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_MinTerritorySize",
@@ -1201,7 +1390,8 @@
       "min": 1.0,
       "max": 196608.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_BorderSmoothRadius",
@@ -1214,7 +1404,8 @@
       "min": 0.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig__borderThreshold",
@@ -1227,7 +1418,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EncirclementClosedLoopThreshold",
@@ -1240,7 +1432,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EnclaveEnemyShare",
@@ -1253,7 +1446,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_HoleFillThreshold",
@@ -1266,7 +1460,8 @@
       "min": 5.0,
       "max": 8.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_ErosionEnabled",
@@ -1279,7 +1474,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_EnclaveDecayEnabled",
@@ -1292,7 +1488,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_NeutralEnclaveDecayEnabled",
@@ -1305,7 +1502,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_FillHoles",
@@ -1318,7 +1516,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_RemoveSmallIslands",
@@ -1331,7 +1530,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConfig_LoadRadiusPadding",
@@ -1344,7 +1544,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConfig_MaxWaterSearchRadius",
@@ -1357,7 +1558,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConfig_ShoreOverlap",
@@ -1370,7 +1572,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConfig_LandingPressSeconds",
@@ -1383,7 +1586,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "NavalConfig_LandingPressAngleDegrees",
@@ -1396,7 +1600,8 @@
       "min": 5.0,
       "max": 89.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TechTreeConfig_KillProgressCapFraction",
@@ -1409,7 +1614,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TechTreeConfig_KillRewardPerUnitCost",
@@ -1422,7 +1628,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitHealth__regenTickInterval",
@@ -1435,7 +1642,8 @@
       "min": 0.01,
       "max": 60.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitHealth__regenCombatExitDebounceFixedSteps",
@@ -1448,7 +1656,8 @@
       "min": 1.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__regenTickInterval",
@@ -1461,7 +1670,8 @@
       "min": 0.01,
       "max": 60.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "UnitMorale__combatExitDebounceFixedSteps",
@@ -1474,7 +1684,8 @@
       "min": 1.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__minPushSpeed",
@@ -1487,7 +1698,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__sectorHysteresis",
@@ -1500,7 +1712,8 @@
       "min": 0.0,
       "max": 180.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable__engagementContactSlack",
@@ -1513,7 +1726,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_RouteCheckInterval",
@@ -1526,7 +1740,8 @@
       "min": 0.05,
       "max": 60.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_RouteLookahead",
@@ -1539,7 +1754,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_WaypointReachBodyRadii",
@@ -1552,7 +1768,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_SkipWaypointBodyRadii",
@@ -1565,7 +1782,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_SidestepProbeDistance",
@@ -1578,7 +1796,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_LandingZoneBodyRadii",
@@ -1591,7 +1810,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_ArrivalStallTimeout",
@@ -1604,7 +1824,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_StallProgressBodyFraction",
@@ -1617,7 +1838,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_FriendContactSlack",
@@ -1630,7 +1852,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_BlockedArrivalBodyRadii",
@@ -1643,7 +1866,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_MaxTerrainEscapePerStep",
@@ -1656,7 +1880,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_OverlapResolveRate",
@@ -1669,7 +1894,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "SimpleMovable_EngagedExitDebounceFixedSteps",
@@ -1682,7 +1908,8 @@
       "min": 1.0,
       "max": 100.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "TerritoryConfig_UpdateInterval",
@@ -1695,7 +1922,8 @@
       "min": 0.05,
       "max": 60.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_infantry_Cost",
@@ -1708,7 +1936,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_infantry_Prereqs",
@@ -1721,7 +1950,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_infantry_Effect",
@@ -1738,7 +1968,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_infantry_UnitId",
@@ -1751,7 +1982,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_infantry_Value",
@@ -1764,7 +1996,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_infantry_Era",
@@ -1777,7 +2010,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_cavalry_Cost",
@@ -1790,7 +2024,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_cavalry_Prereqs",
@@ -1803,7 +2038,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_cavalry_Effect",
@@ -1820,7 +2056,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_cavalry_UnitId",
@@ -1833,7 +2070,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_cavalry_Value",
@@ -1846,7 +2084,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_cavalry_Era",
@@ -1859,7 +2098,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_engineers_Cost",
@@ -1872,7 +2112,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_engineers_Prereqs",
@@ -1885,7 +2126,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_engineers_Effect",
@@ -1902,7 +2144,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_engineers_UnitId",
@@ -1915,7 +2158,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_engineers_Value",
@@ -1928,7 +2172,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_engineers_Era",
@@ -1941,7 +2186,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_machinegun_Cost",
@@ -1954,7 +2200,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_machinegun_Prereqs",
@@ -1967,7 +2214,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_machinegun_Effect",
@@ -1984,7 +2232,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_machinegun_UnitId",
@@ -1997,7 +2246,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_machinegun_Value",
@@ -2010,7 +2260,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_machinegun_Era",
@@ -2023,7 +2274,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_artillery_Cost",
@@ -2036,7 +2288,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_artillery_Prereqs",
@@ -2049,7 +2302,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_artillery_Effect",
@@ -2066,7 +2320,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_artillery_UnitId",
@@ -2079,7 +2334,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_artillery_Value",
@@ -2092,7 +2348,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_artillery_Era",
@@ -2105,7 +2362,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_Cost",
@@ -2118,7 +2376,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_Prereqs",
@@ -2131,7 +2390,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_Effect",
@@ -2148,7 +2408,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_UnitId",
@@ -2161,7 +2422,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_Value",
@@ -2174,7 +2436,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_Era",
@@ -2187,7 +2450,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_tank_Cost",
@@ -2200,7 +2464,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_tank_Prereqs",
@@ -2213,7 +2478,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_tank_Effect",
@@ -2230,7 +2496,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_tank_UnitId",
@@ -2243,7 +2510,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_tank_Value",
@@ -2256,7 +2524,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_tank_Era",
@@ -2269,7 +2538,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_1_Cost",
@@ -2282,7 +2552,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_1_Prereqs",
@@ -2295,7 +2566,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_1_Effect",
@@ -2312,7 +2584,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_1_UnitId",
@@ -2325,7 +2598,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_1_Value",
@@ -2338,7 +2612,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_1_Era",
@@ -2351,7 +2626,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_2_Cost",
@@ -2364,7 +2640,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_2_Prereqs",
@@ -2377,7 +2654,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_2_Effect",
@@ -2394,7 +2672,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_2_UnitId",
@@ -2407,7 +2686,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_2_Value",
@@ -2420,7 +2700,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_troop_limit_2_Era",
@@ -2433,7 +2714,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_naval_affairs_Cost",
@@ -2446,7 +2728,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_naval_affairs_Prereqs",
@@ -2459,7 +2742,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_naval_affairs_Effect",
@@ -2476,7 +2760,8 @@
         "1",
         "2"
       ],
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_naval_affairs_UnitId",
@@ -2489,7 +2774,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_naval_affairs_Value",
@@ -2502,7 +2788,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "tech_naval_affairs_Era",
@@ -2515,7 +2802,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_PushRatio",
@@ -2528,7 +2816,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_AlarmPushRatioMultiplier",
@@ -2541,7 +2830,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_GarrisonFraction",
@@ -2554,7 +2844,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_AssaultPowerMargin",
@@ -2567,7 +2858,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_RetreatHpFraction",
@@ -2580,7 +2872,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ArtilleryStandoffFactor",
@@ -2593,7 +2886,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_EnemyOutnumberedRatio",
@@ -2606,7 +2900,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_CapitalValue",
@@ -2619,7 +2914,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_LostCapitalValue",
@@ -2632,7 +2928,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_CityValue",
@@ -2645,7 +2942,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_NeutralBonus",
@@ -2658,7 +2956,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_DistanceWeight",
@@ -2671,7 +2970,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ThreatWeight",
@@ -2684,7 +2984,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_WeightInfantry",
@@ -2697,7 +2998,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_WeightTank",
@@ -2710,7 +3012,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_WeightCavalry",
@@ -2723,7 +3026,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_WeightMachineGun",
@@ -2736,7 +3040,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_MinReissueInterval",
@@ -2749,7 +3054,8 @@
       "min": 0.05,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_SameDestEpsilon",
@@ -2762,7 +3068,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_WaterCostThreshold",
@@ -2775,7 +3082,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_UnreachableTolerance",
@@ -2788,7 +3096,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_MaxQueuePerCity",
@@ -2801,7 +3110,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_MinLiveUnitsForTech",
@@ -2814,7 +3124,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_RushUnitThreshold",
@@ -2827,7 +3138,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_SingleCityStallSeconds",
@@ -2840,7 +3152,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_EngageHysteresis",
@@ -2853,7 +3166,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_EngageRangeFactor",
@@ -2866,7 +3180,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_DisengageRangeFactor",
@@ -2879,7 +3194,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_AssaultTimeout",
@@ -2892,7 +3208,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_PushCooldown",
@@ -2905,7 +3222,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_BreakthroughEvery",
@@ -2918,7 +3236,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_AlarmResponders",
@@ -2931,7 +3250,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_StalemateSeconds",
@@ -2944,7 +3264,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_MaxFrontHalfWidth",
@@ -2957,7 +3278,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_GarrisonHoldSeconds",
@@ -2970,7 +3292,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_MaxSimultaneousAssaults",
@@ -2983,7 +3306,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_CommittedTargetBonus",
@@ -2996,7 +3320,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_CapitalGuardMinUnits",
@@ -3009,7 +3334,8 @@
       "min": 1.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_RecoveredHpFraction",
@@ -3022,7 +3348,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_RetreatSeconds",
@@ -3035,7 +3362,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_MinAssaultPower",
@@ -3048,7 +3376,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_StagingBackoff",
@@ -3061,7 +3390,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_DepthWeight",
@@ -3074,7 +3404,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_CrowdingPenalty",
@@ -3087,7 +3418,8 @@
       "min": 0.0,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_EconomyInterval",
@@ -3100,7 +3432,8 @@
       "min": 0.05,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ResearchInterval",
@@ -3113,7 +3446,8 @@
       "min": 0.05,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_StrategyInterval",
@@ -3126,7 +3460,8 @@
       "min": 0.05,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_CombatInterval",
@@ -3139,7 +3474,8 @@
       "min": 0.05,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ContactRangeFactor",
@@ -3152,7 +3488,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ContactMapFraction",
@@ -3165,7 +3502,8 @@
       "min": 0.001,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ClusterFactor",
@@ -3178,7 +3516,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_AlarmCityFactor",
@@ -3191,7 +3530,8 @@
       "min": 0.001,
       "max": 100000.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_AlarmMapFraction",
@@ -3204,7 +3544,8 @@
       "min": 0.001,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_InfiltrationMapFraction",
@@ -3217,7 +3558,8 @@
       "min": 0.0,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     },
     {
       "key": "AiTuning_ArrivalClusterFraction",
@@ -3230,7 +3572,8 @@
       "min": 0.001,
       "max": 1.0,
       "options": null,
-      "world": false
+      "world": false,
+      "revision": 1
     }
   ],
   "units": [
@@ -3241,10 +3584,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -3319,10 +3666,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -3397,10 +3748,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -3475,10 +3830,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -3553,10 +3912,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -3631,10 +3994,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",
@@ -3709,10 +4076,14 @@
       "fields": [
         "UnitData_Cost",
         "UnitData_ExcludeFromProduction",
+        "UnitData_TroopLimitCost",
         "UnitHealth__maxHealth",
         "UnitHealth__regenStandardPerSecond",
         "UnitHealth__regenAfterCombatPerSecond",
         "UnitHealth__calmAfterCombatSettings",
+        "UnitHealth__meleeResistance",
+        "UnitHealth__bulletResistance",
+        "UnitHealth__explosiveResistance",
         "UnitMorale__maxMorale",
         "UnitMorale__drainMeleePerSecond",
         "UnitMorale__regenStandardPerSecond",

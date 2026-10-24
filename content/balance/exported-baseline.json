@@ -1,18 +1,22 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "unitDefaults": {
     "UnitData_Cost": 15,
     "UnitData_ExcludeFromProduction": false,
+    "UnitData_TroopLimitCost": 1,
     "UnitHealth__maxHealth": 132.0,
     "UnitHealth__regenStandardPerSecond": 7.8,
     "UnitHealth__regenAfterCombatPerSecond": 1.0,
     "UnitHealth__calmAfterCombatSettings": 6.0,
+    "UnitHealth__meleeResistance": 0.0,
+    "UnitHealth__bulletResistance": 0.0,
+    "UnitHealth__explosiveResistance": 0.0,
     "UnitMorale__maxMorale": 100.0,
     "UnitMorale__drainMeleePerSecond": 2.96,
     "UnitMorale__regenStandardPerSecond": 2.96,
     "UnitMorale__regenAfterCombatPerSecond": 2.0,
     "UnitMorale__calmAfterCombatSeconds": 6.0,
-    "SimpleMovable__speed": 0.0891,
+    "SimpleMovable__speed": 0.0802,
     "SimpleMovable__domain": 0,
     "SimpleMovable__stopDistance": 0.1,
     "SimpleMovable__safeDistance": 0.5,
@@ -77,6 +81,7 @@
     "engineer_unit": {
       "UnitData_Cost": 18,
       "UnitData_ExcludeFromProduction": false,
+      "UnitData_TroopLimitCost": 1,
       "UnitHealth__maxHealth": 105.0,
       "UnitHealth__regenStandardPerSecond": 10.4,
       "UnitHealth__regenAfterCombatPerSecond": 1.0,
@@ -86,13 +91,17 @@
     "tank_unit": {
       "UnitData_Cost": 35,
       "UnitData_ExcludeFromProduction": false,
+      "UnitData_TroopLimitCost": 3,
       "UnitHealth__maxHealth": 264.0,
       "UnitHealth__regenStandardPerSecond": 6.5,
       "UnitHealth__regenAfterCombatPerSecond": 1.0,
+      "UnitHealth__meleeResistance": 25.0,
+      "UnitHealth__bulletResistance": 70.0,
+      "UnitHealth__explosiveResistance": 5.0,
       "UnitMorale__maxMorale": 200.0,
-      "SimpleMovable__speed": 0.065,
-      "SimpleMovable__weight": 3.0,
-      "SimpleMovable__pushForce": 4.5,
+      "SimpleMovable__speed": 0.0585,
+      "SimpleMovable__weight": 5.0,
+      "SimpleMovable__pushForce": 6.5,
       "MeleeAttacker__damage": 14.0,
       "RangedAttacker__prSize": 0.4,
       "RangedAttacker__prDamage": 10.0,
@@ -108,10 +117,13 @@
     "cavalry_unit": {
       "UnitData_Cost": 20,
       "UnitData_ExcludeFromProduction": false,
+      "UnitData_TroopLimitCost": 1,
       "UnitHealth__maxHealth": 105.0,
       "UnitHealth__regenStandardPerSecond": 9.75,
       "UnitHealth__regenAfterCombatPerSecond": 1.0,
-      "SimpleMovable__speed": 0.19,
+      "UnitHealth__bulletResistance": -5.0,
+      "UnitHealth__explosiveResistance": -10.0,
+      "SimpleMovable__speed": 0.171,
       "SimpleMovable__weight": 0.8,
       "SimpleMovable__pushForce": 3.0,
       "MeleeAttacker__damage": 3.0
@@ -119,7 +131,9 @@
     "machinegun_unit": {
       "UnitData_Cost": 20,
       "UnitData_ExcludeFromProduction": false,
+      "UnitData_TroopLimitCost": 1,
       "UnitHealth__maxHealth": 84.0,
+      "UnitHealth__meleeResistance": -175.0,
       "SimpleMovable__pushForce": 0.8,
       "MeleeAttacker__damage": 3.0,
       "RangedAttacker__prDamage": 3.0,
@@ -129,8 +143,10 @@
     "artillery_unit": {
       "UnitData_Cost": 30,
       "UnitData_ExcludeFromProduction": false,
+      "UnitData_TroopLimitCost": 2,
       "UnitHealth__maxHealth": 20.0,
-      "SimpleMovable__speed": 0.11,
+      "UnitHealth__meleeResistance": -200.0,
+      "SimpleMovable__speed": 0.099,
       "SimpleMovable__weight": 0.6,
       "SimpleMovable__pushForce": 0.5,
       "MeleeAttacker__damage": 1.0,
@@ -150,6 +166,7 @@
     "barge_unit": {
       "UnitData_Cost": 15,
       "UnitData_ExcludeFromProduction": true,
+      "UnitData_TroopLimitCost": 1,
       "UnitHealth__regenStandardPerSecond": 0.0,
       "UnitHealth__regenAfterCombatPerSecond": 0.0,
       "UnitMorale__regenStandardPerSecond": 0.0,
@@ -171,6 +188,10 @@
     }
   },
   "globals": {
+    "combat": {
+      "UnitsConfig_GlobalDamageMultiplier": 0.9,
+      "MapsConfig_TroopLimitBonus": 5
+    },
     "match": {
       "GameConfig_MatchStartCountdown": 10.0
     },
@@ -178,6 +199,7 @@
       "MapsConfig_CitySettings_InfluenceRadius": 5.0,
       "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier": 0.5,
       "MapsConfig_CitySettings_BuffSettings_RegenMultiplier": 1.5,
+      "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier": 2.5,
       "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed": 1.0,
       "MapsConfig_CitySettings_ProductionSettings_SwitchingPenaltySeconds": 10.0,
       "MapsConfig_CitySettings_ProductionSettings_CapturePenaltySeconds": 20.0,
@@ -217,7 +239,7 @@
           "OutgoingDamageMultiplier": 0.5,
           "IncomingDamageMultiplier": 1.0,
           "RegenMultiplier": 1.0,
-          "DamageOverTimePerSecond": 5.0
+          "DamageOverTimePerSecond": 3.8
         }
       ],
       "TerrainEffectsConfig_ForestEffect": {
@@ -246,7 +268,7 @@
       "TerritoryConfig_CityInfluenceRadius": 0.9,
       "TerritoryConfig_UnitProtectedRadius": 0.11,
       "TerritoryConfig_CityProtectedRadius": 0.0,
-      "TerritoryConfig_EncirclementDrainPerSecond": 6.0,
+      "TerritoryConfig_EncirclementDrainPerSecond": 4.5,
       "TerritoryConfig_ErosionRadius": 10.0,
       "TerritoryConfig_ErosionSpeed": 0.8,
       "TerritoryConfig_EnclaveDecaySpeed": 6.0,
