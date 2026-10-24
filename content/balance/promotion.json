@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "",
-  "expectedHash": "d5fc14a2f2337918504fee26ff9ec90833f4e7d40f496cc4ae73c4e622ee73c5",
-  "comment": "Первоначальный баланс, экспортированный из Unity."
+  "sourceCommit": "3ea81d3d6a2aef2f8baabc43ccd8a642f899691a",
+  "expectedHash": "5185fb73773318600fbb97fc6908c8c2ff7b665a7c8f467b2485d8d8e9dae3c9",
+  "comment": "Новый баланс"
 }
