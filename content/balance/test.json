@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "unitDefaults": {
-    "UnitData_Cost": 15,
+    "UnitData_Cost": 30,
     "UnitData_ExcludeFromProduction": false,
     "UnitData_TroopLimitCost": 1,
     "UnitHealth__maxHealth": 132,
