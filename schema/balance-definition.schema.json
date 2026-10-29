@@ -11,7 +11,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 2
+      "const": 3
     },
     "unitDefaults": {
       "type": "object",
@@ -2746,6 +2746,7 @@
         "morale",
         "ranged",
         "terrain",
+        "urban",
         "territory",
         "naval",
         "research",
@@ -2791,9 +2792,6 @@
           "additionalProperties": false,
           "required": [
             "MapsConfig_CitySettings_InfluenceRadius",
-            "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier",
-            "MapsConfig_CitySettings_BuffSettings_RegenMultiplier",
-            "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier",
             "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed",
             "MapsConfig_CitySettings_ProductionSettings_SwitchingPenaltySeconds",
             "MapsConfig_CitySettings_ProductionSettings_CapturePenaltySeconds",
@@ -2804,21 +2802,6 @@
               "type": "number",
               "minimum": 0.001,
               "maximum": 100000
-            },
-            "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "MapsConfig_CitySettings_BuffSettings_RegenMultiplier": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier": {
-              "type": "number",
-              "minimum": 0.01,
-              "maximum": 100
             },
             "MapsConfig_CitySettings_ProductionSettings_ProductionSpeed": {
               "type": "number",
@@ -3115,6 +3098,158 @@
             },
             "TerrainEffectsConfig_NoSidestepIntoWater": {
               "type": "boolean"
+            }
+          }
+        },
+        "urban": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UrbanConfig_ShellDamageMultiplier",
+            "UrbanConfig_ApproachDamageMultiplier",
+            "UrbanConfig_RegenMultiplier",
+            "UrbanConfig_PushResistanceMultiplier",
+            "UrbanConfig_RuinsStrength",
+            "UrbanConfig_RuinsThreshold",
+            "UrbanConfig_MeleeDestructionSeconds",
+            "UrbanConfig_TankExplosionHits",
+            "UrbanConfig_ArtilleryExplosionHits",
+            "UrbanConfig_DefaultExplosionHits",
+            "UrbanConfig_RebuildQuietSeconds",
+            "UrbanConfig_RebuildCellSeconds",
+            "UrbanConfig_FireChance",
+            "UrbanConfig_MaxFires",
+            "UrbanConfig_FireSeconds",
+            "UrbanConfig_CollapseSeconds",
+            "UrbanConfig_UnitEffects_0_Speed",
+            "UrbanConfig_UnitEffects_0_StreetDamage",
+            "UrbanConfig_UnitEffects_1_Speed",
+            "UrbanConfig_UnitEffects_1_StreetDamage",
+            "UrbanConfig_UnitEffects_2_Speed",
+            "UrbanConfig_UnitEffects_2_StreetDamage",
+            "UrbanConfig_UnitEffects_3_Speed",
+            "UrbanConfig_UnitEffects_3_StreetDamage"
+          ],
+          "properties": {
+            "UrbanConfig_ShellDamageMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_ApproachDamageMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_RegenMultiplier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_PushResistanceMultiplier": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_RuinsStrength": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "UrbanConfig_RuinsThreshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "UrbanConfig_MeleeDestructionSeconds": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UrbanConfig_TankExplosionHits": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 255
+            },
+            "UrbanConfig_ArtilleryExplosionHits": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 255
+            },
+            "UrbanConfig_DefaultExplosionHits": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 255
+            },
+            "UrbanConfig_RebuildQuietSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "UrbanConfig_RebuildCellSeconds": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UrbanConfig_FireChance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "UrbanConfig_MaxFires": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 200
+            },
+            "UrbanConfig_FireSeconds": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100000
+            },
+            "UrbanConfig_CollapseSeconds": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 10
+            },
+            "UrbanConfig_UnitEffects_0_Speed": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_0_StreetDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_1_Speed": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_1_StreetDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_2_Speed": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_2_StreetDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_3_Speed": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_3_StreetDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
             }
           }
         },

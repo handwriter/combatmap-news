@@ -171,7 +171,7 @@ collections:
             {
               "name": "schemaVersion",
               "widget": "hidden",
-              "default": 2
+              "default": 3
             },
             {
               "name": "unitDefaults",
@@ -6717,7 +6717,7 @@ collections:
                 },
                 {
                   "name": "cities",
-                  "label": "Города: производство и бонусы",
+                  "label": "Административные центры",
                   "widget": "object",
                   "collapsed": true,
                   "fields": [
@@ -6730,39 +6730,6 @@ collections:
                       "value_type": "float",
                       "min": 0.001,
                       "max": 100000,
-                      "step": 1e-8
-                    },
-                    {
-                      "name": "MapsConfig_CitySettings_BuffSettings_IncomingDamageMultiplier",
-                      "label": "Входящий урон в городе",
-                      "hint": "Множитель: 1 — обычный урон, 0 — не получать урон. Диапазон: 0–100.",
-                      "required": true,
-                      "widget": "number",
-                      "value_type": "float",
-                      "min": 0,
-                      "max": 100,
-                      "step": 1e-8
-                    },
-                    {
-                      "name": "MapsConfig_CitySettings_BuffSettings_RegenMultiplier",
-                      "label": "Восстановление в городе",
-                      "hint": "Множитель регенерации; 0 — не восстанавливать. Диапазон: 0–100.",
-                      "required": true,
-                      "widget": "number",
-                      "value_type": "float",
-                      "min": 0,
-                      "max": 100,
-                      "step": 1e-8
-                    },
-                    {
-                      "name": "MapsConfig_CitySettings_BuffSettings_PushResistanceMultiplier",
-                      "label": "Устойчивость к толканию в городе",
-                      "hint": "Множитель веса любого юнита в зоне города, чей бы город ни был. 1 — без изменений. Диапазон: 0.01–100. Ноль недопустим.",
-                      "required": true,
-                      "widget": "number",
-                      "value_type": "float",
-                      "min": 0.01,
-                      "max": 100,
                       "step": 1e-8
                     },
                     {
@@ -7356,6 +7323,278 @@ collections:
                       "hint": "Защищает юнитов на суше от обхода и расталкивания в воду.",
                       "required": true,
                       "widget": "boolean"
+                    }
+                  ]
+                },
+                {
+                  "name": "urban",
+                  "label": "Застройка",
+                  "widget": "object",
+                  "collapsed": true,
+                  "fields": [
+                    {
+                      "name": "UrbanConfig_ShellDamageMultiplier",
+                      "label": "Застройка: урон от обстрела",
+                      "hint": "Множитель получаемого урона от пуль и взрывов. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_ApproachDamageMultiplier",
+                      "label": "Застройка: урон с подступов",
+                      "hint": "Атакующий в ближнем бою вне застройки. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_RegenMultiplier",
+                      "label": "Застройка: реген HP",
+                      "hint": "Умножает обычный реген, мораль не меняет. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_PushResistanceMultiplier",
+                      "label": "Застройка: сопротивление толчку",
+                      "hint": "Множитель веса для всех сторон. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_RuinsStrength",
+                      "label": "Сила эффектов в руинах",
+                      "hint": "Руины = 1 + (целая - 1) × сила. Диапазон: 0–1.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 1,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_RuinsThreshold",
+                      "label": "Порог руин",
+                      "hint": "Клетка становится руинами при доле разрушений строго больше порога. Диапазон: 0–1.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 1,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_MeleeDestructionSeconds",
+                      "label": "Время разрушения в ближнем бою",
+                      "hint": "Секунды боя до полного разрушения клетки. Диапазон: 0.01–100000. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100000,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_TankExplosionHits",
+                      "label": "Взрывы на дом: Tank",
+                      "hint": "Число попаданий до разрушения дома. Диапазон: 1–255. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "int",
+                      "min": 1,
+                      "max": 255,
+                      "step": 1
+                    },
+                    {
+                      "name": "UrbanConfig_ArtilleryExplosionHits",
+                      "label": "Взрывы на дом: Artillery",
+                      "hint": "Число попаданий до разрушения дома. Диапазон: 1–255. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "int",
+                      "min": 1,
+                      "max": 255,
+                      "step": 1
+                    },
+                    {
+                      "name": "UrbanConfig_DefaultExplosionHits",
+                      "label": "Взрывы на дом: Default",
+                      "hint": "Число попаданий до разрушения дома. Диапазон: 1–255. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "int",
+                      "min": 1,
+                      "max": 255,
+                      "step": 1
+                    },
+                    {
+                      "name": "UrbanConfig_RebuildQuietSeconds",
+                      "label": "Пауза перед отстройкой",
+                      "hint": "Секунды без взрывов и ближнего боя. Диапазон: 0–100000.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100000,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_RebuildCellSeconds",
+                      "label": "Время отстройки клетки",
+                      "hint": "Секунды для всех домов клетки при действующем административном центре. Диапазон: 0.01–100000. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100000,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_FireChance",
+                      "label": "Доля руин с пожаром",
+                      "hint": "Вероятность пожара при разрушении дома. Диапазон: 0–1.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 1,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_MaxFires",
+                      "label": "Лимит пожаров",
+                      "hint": "Одновременные пожары на всей карте. Диапазон: 0–200.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "int",
+                      "min": 0,
+                      "max": 200,
+                      "step": 1
+                    },
+                    {
+                      "name": "UrbanConfig_FireSeconds",
+                      "label": "Длительность пожара",
+                      "hint": "Секунды горения руин. Диапазон: 0.01–100000. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100000,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_CollapseSeconds",
+                      "label": "Длительность обрушения",
+                      "hint": "Секунды пыли при разрушении. Диапазон: 0.01–10. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 10,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_0_Speed",
+                      "label": "Инженеры: скорость в застройке",
+                      "hint": "Множитель скорости в целой клетке. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_0_StreetDamage",
+                      "label": "Инженеры: уличный бой",
+                      "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_1_Speed",
+                      "label": "Кавалерия: скорость в застройке",
+                      "hint": "Множитель скорости в целой клетке. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_1_StreetDamage",
+                      "label": "Кавалерия: уличный бой",
+                      "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_2_Speed",
+                      "label": "Танк: скорость в застройке",
+                      "hint": "Множитель скорости в целой клетке. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_2_StreetDamage",
+                      "label": "Танк: уличный бой",
+                      "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_3_Speed",
+                      "label": "Артиллерия: скорость в застройке",
+                      "hint": "Множитель скорости в целой клетке. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_3_StreetDamage",
+                      "label": "Артиллерия: уличный бой",
+                      "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
                     }
                   ]
                 },

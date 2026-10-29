@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(await readFile(path.join(root, 'schema/balance-catalog.json'), 'utf8'));
 const byKey = new Map(catalog.fields.map(f => [f.key, f]));
 // Sections absent from the catalog (older schemas) are skipped.
-const allLabels = { match: 'Начало матча', combat: 'Бой и лимит войск', cities: 'Города: производство и бонусы', morale: 'Мораль', ranged: 'Подавление регенерации', terrain: 'Местность', territory: 'Территория и окружение', naval: 'Погрузка и высадка', research: 'Исследования', ai: 'ИИ' };
+const allLabels = { match: 'Начало матча', combat: 'Бой и лимит войск', cities: 'Административные центры', morale: 'Мораль', ranged: 'Подавление регенерации', terrain: 'Местность', urban: 'Застройка', territory: 'Территория и окружение', naval: 'Погрузка и высадка', research: 'Исследования', ai: 'ИИ' };
 const labels = Object.fromEntries(Object.entries(allLabels).filter(([section]) => catalog.fields.some(f => f.section === section)));
 const entityNames = { base_unit: 'Базовый юнит / пехота', engineer_unit: 'Инженеры', cavalry_unit: 'Кавалерия', tank_unit: 'Танк', machinegun_unit: 'Пулемётчики', artillery_unit: 'Артиллерия', barge_unit: 'Баржа', city: 'Город', city_capital: 'Столица' };
 const selectOptions = f => f.options.map(v => ({ value: Number(v), label: f.path === '_domain' ? ['Наземный', 'Морской'][v] : f.path === '_prFlightType' ? ['Наземный', 'Навесной'][v] : f.path.endsWith('.Effect') ? ['Открыть юнит', 'Повысить лимит войск', 'Открыть морскую конверсию'][v] : v }));

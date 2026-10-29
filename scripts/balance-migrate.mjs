@@ -6,7 +6,8 @@
 import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { canonical, resolveDefinition, sameDefinition } from '../site/balance-model.js';
+import { canonical, convertSnapshot, resolveDefinition, sameDefinition } from '../site/balance-model.js';
+import { execFileSync } from 'node:child_process';
 import { buildBalance, hash } from './balance.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -31,19 +32,30 @@ if (exported.schemaVersion !== catalog.schemaVersion) throw Error('exported-base
 
 // 1. Freeze what released clients of the old schema receive right now.
 const frozen = `content/balance/legacy/v${legacy.schemaVersion}`;
-if (!await exists(`${frozen}/test.json`)) {
-  await save(`${frozen}/test.json`, resolveDefinition(test, legacy).snapshot);
+if (!await exists(`${frozen}/test.json`) || !await exists(`${frozen}/prod.json`)) {
+  if (!await exists(`${frozen}/test.json`)) await save(`${frozen}/test.json`, resolveDefinition(test, legacy).snapshot);
   const promotion = await read('content/balance/promotion.json');
-  let prod;
-  if (promotion.sourceCommit === '') prod = resolveDefinition(await read('content/balance/prod-bootstrap.json'), legacy).snapshot;
+  let prod, prodCatalog;
+  if (promotion.sourceCommit === '') {
+    const bootstrap = await read('content/balance/prod-bootstrap.json');
+    prodCatalog = bootstrap.schemaVersion === legacy.schemaVersion ? legacy
+      : await read(`schema/legacy/balance-catalog.v${bootstrap.schemaVersion}.json`);
+    prod = resolveDefinition(bootstrap, prodCatalog).snapshot;
+  }
   else {
     // A promoted revision of the old schema is still in the Git history of the site.
-    const { execFileSync } = await import('node:child_process');
     const show = file => JSON.parse(execFileSync('git', ['show', `${promotion.sourceCommit}:${file}`], { cwd: root, encoding: 'utf8' }));
-    prod = resolveDefinition(show('content/balance/test.json'), show('schema/balance-catalog.json')).snapshot;
+    prodCatalog = show('schema/balance-catalog.json');
+    prod = resolveDefinition(show('content/balance/test.json'), prodCatalog).snapshot;
   }
   if (hash(canonical(prod)) !== promotion.expectedHash) throw Error('Замороженный prod не совпадает с опубликованным хэшем');
-  await save(`${frozen}/prod.json`, prod);
+  if (prodCatalog.schemaVersion !== legacy.schemaVersion) {
+    // The published revision may predate the schema being frozen. Reproduce the old
+    // site's conversion with its committed Unity baseline, before the new export.
+    const previousExport = JSON.parse(execFileSync('git', ['show', 'HEAD:content/balance/exported-baseline.json'], { cwd: root, encoding: 'utf8' }));
+    prod = convertSnapshot(prod, prodCatalog, legacy, resolveDefinition(previousExport, legacy).snapshot);
+  }
+  if (!await exists(`${frozen}/prod.json`)) await save(`${frozen}/prod.json`, prod);
 }
 
 // 2. Migrate the sparse model field by field.
