@@ -171,7 +171,7 @@ collections:
             {
               "name": "schemaVersion",
               "widget": "hidden",
-              "default": 3
+              "default": 4
             },
             {
               "name": "unitDefaults",
@@ -6682,6 +6682,17 @@ collections:
                       "min": 0,
                       "max": 100000,
                       "step": 1e-8
+                    },
+                    {
+                      "name": "GameConfig_MatchDuration",
+                      "label": "Длительность матча",
+                      "hint": "Секунды боя после отсчёта. По истечении побеждает сторона с наибольшим числом городов, при равенстве — ничья. 0 — без лимита. Диапазон: 0–100000.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100000,
+                      "step": 1e-8
                     }
                   ]
                 },
@@ -7588,6 +7599,50 @@ collections:
                     {
                       "name": "UrbanConfig_UnitEffects_3_StreetDamage",
                       "label": "Артиллерия: уличный бой",
+                      "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_4_Speed",
+                      "label": "Пехота: скорость в застройке",
+                      "hint": "Множитель скорости в целой клетке. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_4_StreetDamage",
+                      "label": "Пехота: уличный бой",
+                      "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_5_Speed",
+                      "label": "Пулемётчики: скорость в застройке",
+                      "hint": "Множитель скорости в целой клетке. Диапазон: 0.01–100. Ноль недопустим.",
+                      "required": true,
+                      "widget": "number",
+                      "value_type": "float",
+                      "min": 0.01,
+                      "max": 100,
+                      "step": 1e-8
+                    },
+                    {
+                      "name": "UrbanConfig_UnitEffects_5_StreetDamage",
+                      "label": "Пулемётчики: уличный бой",
                       "hint": "Получаемый урон, когда атакующий тоже в застройке. Диапазон: 0–100.",
                       "required": true,
                       "widget": "number",

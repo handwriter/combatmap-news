@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "unitDefaults": {
     "UnitData_Cost": 15,
     "UnitData_ExcludeFromProduction": false,
@@ -193,7 +193,8 @@
       "MapsConfig_TroopLimitBonus": 5
     },
     "match": {
-      "GameConfig_MatchStartCountdown": 10.0
+      "GameConfig_MatchStartCountdown": 10.0,
+      "GameConfig_MatchDuration": 2700.0
     },
     "cities": {
       "MapsConfig_CitySettings_InfluenceRadius": 5.0,
@@ -203,10 +204,10 @@
       "MapsConfig_CitySettings_ProductionSettings_DefaultStandardUnitId": "base_unit"
     },
     "urban": {
-      "UrbanConfig_ShellDamageMultiplier": 0.5,
-      "UrbanConfig_ApproachDamageMultiplier": 0.5,
-      "UrbanConfig_RegenMultiplier": 1.5,
-      "UrbanConfig_PushResistanceMultiplier": 2.5,
+      "UrbanConfig_ShellDamageMultiplier": 0.45,
+      "UrbanConfig_ApproachDamageMultiplier": 0.45,
+      "UrbanConfig_RegenMultiplier": 1.65,
+      "UrbanConfig_PushResistanceMultiplier": 2.75,
       "UrbanConfig_RuinsStrength": 0.5,
       "UrbanConfig_RuinsThreshold": 0.5,
       "UrbanConfig_MeleeDestructionSeconds": 60.0,
@@ -219,14 +220,18 @@
       "UrbanConfig_MaxFires": 40,
       "UrbanConfig_FireSeconds": 60.0,
       "UrbanConfig_CollapseSeconds": 0.8,
-      "UrbanConfig_UnitEffects_0_Speed": 1.0,
-      "UrbanConfig_UnitEffects_0_StreetDamage": 0.75,
-      "UrbanConfig_UnitEffects_1_Speed": 0.6,
+      "UrbanConfig_UnitEffects_0_Speed": 0.85,
+      "UrbanConfig_UnitEffects_0_StreetDamage": 0.675,
+      "UrbanConfig_UnitEffects_1_Speed": 0.51,
       "UrbanConfig_UnitEffects_1_StreetDamage": 1.5,
-      "UrbanConfig_UnitEffects_2_Speed": 0.6,
+      "UrbanConfig_UnitEffects_2_Speed": 0.51,
       "UrbanConfig_UnitEffects_2_StreetDamage": 1.5,
-      "UrbanConfig_UnitEffects_3_Speed": 0.7,
-      "UrbanConfig_UnitEffects_3_StreetDamage": 1.25
+      "UrbanConfig_UnitEffects_3_Speed": 0.595,
+      "UrbanConfig_UnitEffects_3_StreetDamage": 1.25,
+      "UrbanConfig_UnitEffects_4_Speed": 0.85,
+      "UrbanConfig_UnitEffects_4_StreetDamage": 1.0,
+      "UrbanConfig_UnitEffects_5_Speed": 0.85,
+      "UrbanConfig_UnitEffects_5_StreetDamage": 1.0
     },
     "morale": {
       "MoraleConfig_MoraleMultiplierFloor": 0.2,

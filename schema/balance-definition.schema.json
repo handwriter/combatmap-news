@@ -11,7 +11,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 3
+      "const": 4
     },
     "unitDefaults": {
       "type": "object",
@@ -2757,10 +2757,16 @@
           "type": "object",
           "additionalProperties": false,
           "required": [
-            "GameConfig_MatchStartCountdown"
+            "GameConfig_MatchStartCountdown",
+            "GameConfig_MatchDuration"
           ],
           "properties": {
             "GameConfig_MatchStartCountdown": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "GameConfig_MatchDuration": {
               "type": "number",
               "minimum": 0,
               "maximum": 100000
@@ -3128,7 +3134,11 @@
             "UrbanConfig_UnitEffects_2_Speed",
             "UrbanConfig_UnitEffects_2_StreetDamage",
             "UrbanConfig_UnitEffects_3_Speed",
-            "UrbanConfig_UnitEffects_3_StreetDamage"
+            "UrbanConfig_UnitEffects_3_StreetDamage",
+            "UrbanConfig_UnitEffects_4_Speed",
+            "UrbanConfig_UnitEffects_4_StreetDamage",
+            "UrbanConfig_UnitEffects_5_Speed",
+            "UrbanConfig_UnitEffects_5_StreetDamage"
           ],
           "properties": {
             "UrbanConfig_ShellDamageMultiplier": {
@@ -3247,6 +3257,26 @@
               "maximum": 100
             },
             "UrbanConfig_UnitEffects_3_StreetDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_4_Speed": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_4_StreetDamage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_5_Speed": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "UrbanConfig_UnitEffects_5_StreetDamage": {
               "type": "number",
               "minimum": 0,
               "maximum": 100
