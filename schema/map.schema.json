@@ -76,6 +76,16 @@
       "items": {
         "$ref": "#/$defs/bridge"
       }
+    },
+    "zones": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/zoneMask"
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   },
   "$defs": {
@@ -109,28 +119,30 @@
       "type": "object",
       "required": [
         "gridWidth",
-        "gridHeight",
-        "cells"
+        "gridHeight"
       ],
       "properties": {
         "gridWidth": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 1024
+          "maximum": 2048
         },
         "gridHeight": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 1024
+          "maximum": 2048
         },
         "cells": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "type": "integer",
             "minimum": 0,
             "maximum": 7
           },
-          "maxItems": 1048576
+          "maxItems": 4194304
         },
         "trees": {
           "type": [
@@ -140,6 +152,37 @@
           "items": {
             "$ref": "#/$defs/tree"
           }
+        },
+        "format": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "rle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "blendX": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "blendY": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "urban": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/urban"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "additionalProperties": false
@@ -259,6 +302,11 @@
         },
         "startsNeutral": {
           "type": "boolean"
+        },
+        "productionSpeed": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000
         }
       },
       "additionalProperties": false
@@ -322,6 +370,79 @@
         }
       },
       "additionalProperties": false
+    },
+    "urban": {
+      "type": "object",
+      "required": [
+        "scale",
+        "seed",
+        "rle",
+        "houses",
+        "streets",
+        "squares"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scale": {
+          "type": "number",
+          "minimum": 0.4,
+          "maximum": 3
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "rle": {
+          "type": "string"
+        },
+        "houses": {
+          "type": "string"
+        },
+        "streets": {
+          "type": "string"
+        },
+        "squares": {
+          "type": "string"
+        }
+      }
+    },
+    "zoneMask": {
+      "type": "object",
+      "required": [
+        "originX",
+        "originY",
+        "cellSize",
+        "width",
+        "height",
+        "rle"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "originX": {
+          "type": "number"
+        },
+        "originY": {
+          "type": "number"
+        },
+        "cellSize": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "rle": {
+          "type": "string"
+        }
+      }
     }
   }
 }
