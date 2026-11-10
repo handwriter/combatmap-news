@@ -194,7 +194,7 @@
     },
     "match": {
       "GameConfig_MatchStartCountdown": 10.0,
-      "GameConfig_MatchDuration": 2700.0
+      "GameConfig_MatchDuration": 2100.0
     },
     "cities": {
       "MapsConfig_CitySettings_InfluenceRadius": 5.0,
