@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "3ea81d3d6a2aef2f8baabc43ccd8a642f899691a",
-  "expectedHash": "5185fb73773318600fbb97fc6908c8c2ff7b665a7c8f467b2485d8d8e9dae3c9",
-  "comment": "Новый баланс"
+  "sourceCommit": "2c1ecab292b3e1d939a550102e1f6964cb32b38d",
+  "expectedHash": "5ce4c6497e63ce38ba6298a9bc485156849fbdf347a09ec394446c088bde8147",
+  "comment": "Публикация нового баланса: лимит матча 35 минут"
 }
